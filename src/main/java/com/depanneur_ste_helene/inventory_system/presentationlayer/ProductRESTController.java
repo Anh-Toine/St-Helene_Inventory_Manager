@@ -22,7 +22,7 @@ public class ProductRESTController {
                 path = "/product")
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(@RequestBody Product product){
-        return SERVICE.CreateProduct(product);
+        return SERVICE.createProduct(product);
     }
 
 }

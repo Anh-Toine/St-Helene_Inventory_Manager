@@ -14,6 +14,22 @@ public class Product {
     private Integer quantity_sold;
     private Integer category_id;
 
+
+
+    public Product(Integer bar_code, String product_name, String brand, double price, Integer quantity, Integer quantity_sold, Integer category_id) {
+        this.bar_code = bar_code;
+        this.product_name = product_name;
+        this.brand = brand;
+        this.price = price;
+        this.quantity = quantity;
+        this.quantity_sold = quantity_sold;
+        this.category_id = category_id;
+    }
+
+    public Product() {
+
+    }
+
     public Integer getProductId() {
         return productId;
     }
