@@ -13,4 +13,6 @@ public interface ProductService {
     ProductDTO createProduct(@RequestBody ProductDTO model);
 
     ProductDTO updateProduct(ProductDTO model);
+
+    void deleteProduct(int barCode);
 }

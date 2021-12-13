@@ -5,6 +5,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class ProductServiceImplTests {
     private final int QUANTITY_SOLD_VALID = 1;
     private final int QUANTITY_SOLD_INVALID = -1;
 
+    @DisplayName("Create product valid")
     @Test
     public void test_CreateProduct_valid(){
         ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
@@ -61,6 +63,8 @@ public class ProductServiceImplTests {
             productService.createProduct(model);
         });
     }
+
+    @DisplayName("Get all product")
     @Test
     public void test_GetAllProduct(){
 
@@ -78,8 +82,23 @@ public class ProductServiceImplTests {
         assertEquals(productModels.size(), 3);
     }
 
+    @DisplayName("Delete product")
     @Test
-    public void whenValidBarcodeUpdateVisit(){
+    public void test_DeleteProduct(){
+        // Arrange
+
+        Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
+                QUANTITY_SOLD_VALID,1);
+        // Act
+        productService.deleteProduct(entity.getBarCode());
+
+        // Assert
+        verify(productRepository, never()).delete(entity);
+    }
+
+    @DisplayName("Update product")
+    @Test
+    public void test_UpdateProduct(){
 
         when(productRepository.findByBarCode(any())).thenReturn(Optional.ofNullable(productEntity));
         when(productRepository.save(any(Product.class))).thenReturn(productEntity);

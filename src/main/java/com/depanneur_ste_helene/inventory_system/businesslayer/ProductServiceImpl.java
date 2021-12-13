@@ -44,6 +44,13 @@ public class ProductServiceImpl implements ProductService{
         return mapper.entityToModel(updatedProduct);
     }
 
+    @Override
+    public void deleteProduct(int barCode) {
+//        productRepository.findById(barCode).ifPresent(p -> productRepository.delete(p));
+        productRepository.findByBarCode(barCode).ifPresent(p -> productRepository.delete(p));
+        //LOG.debug("deleteProduct: product with bar code {} deleted",barCode);
+    }
+
     public List<ProductDTO> getAllProduct() {
         List<Product> products = productRepository.findAll();
         List<ProductDTO> models = mapper.entityListToModelList(products);
