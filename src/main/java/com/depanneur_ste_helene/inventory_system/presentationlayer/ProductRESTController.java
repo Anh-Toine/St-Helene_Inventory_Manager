@@ -25,4 +25,8 @@ public class ProductRESTController {
         return SERVICE.createProduct(product);
     }
 
+    @DeleteMapping(value = "/{productId}")
+    public void deleteProduct(@PathVariable("productId")int productId){
+        SERVICE.deleteProduct(productId);
+    }
 }

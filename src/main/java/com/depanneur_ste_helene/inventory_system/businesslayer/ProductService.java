@@ -5,4 +5,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface ProductService {
     Product createProduct(@RequestBody Product model);
+    void deleteProduct(int id);
 }
