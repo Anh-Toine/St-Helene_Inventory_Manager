@@ -39,21 +39,26 @@ public class ProductServiceImplTests {
     @DisplayName("Create product valid")
     @Test
     public void test_CreateProduct_valid(){
+        // Arrange
         Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
         Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
         when(productRepository.save(any(Product.class))).thenReturn(entity);
 
+        // Act
         Product returnedProduct = productService.createProduct(model);
 
+        // Assert
         assertThat(returnedProduct.getProductId()).isEqualTo(entity.getProductId());
     }
 
     @DisplayName("Create product invalid")
     @Test
     public void test_CreateProduct_not_valid(){
+        // Arrange
         Product model = new Product(1, "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
         when(productRepository.save(any(Product.class))).thenThrow(InvalidInputException.class);
 
+        // Assert
         assertThrows(InvalidInputException.class, ()->{
             productService.createProduct(model);
         });
@@ -64,12 +69,15 @@ public class ProductServiceImplTests {
     public void test_DeleteProduct_valid(){
         // Arrange
         Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        Product savedProduct = productRepository.save(model);
+        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        when(productRepository.save(any(Product.class))).thenReturn(entity);
+
+        Product createdProduct  = productService.createProduct(model);
 
         // Act
-        productRepository.deleteById(savedProduct.getProductId());
+        productRepository.deleteById(createdProduct.getProductId());
 
         // Assert
-        assertFalse(productRepository.existsById(savedProduct.getProductId()));
+        assertFalse(productRepository.existsById(createdProduct.getProductId()));
     }
 }
