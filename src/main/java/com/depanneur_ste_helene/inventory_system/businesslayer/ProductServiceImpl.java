@@ -5,6 +5,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class ProductServiceImpl implements ProductService{
         this.productRepository = productRepository;
     }
 
-    @Override
     public Product createProduct(Product model) {
         if(model.getPrice() < 0 || model.getQuantity() < 0 || model.getQuantity_sold() < 0){
             throw new InvalidInputException("Input not valid");
@@ -37,5 +37,11 @@ public class ProductServiceImpl implements ProductService{
                 productRepository.deleteProduct(barCode);
         }
         LOG.debug("deleteProduct: product with bar code {} deleted",barCode);
+        return productRepository.save(model);
+    }
+
+    public List<Product> getAllProduct() {
+        List<Product> products = productRepository.findAll();
+        return products;
     }
 }

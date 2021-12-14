@@ -14,6 +14,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -65,6 +68,7 @@ public class ProductServiceImplTests {
         });
     }
 
+
     @DisplayName("Delete product valid")
     @Test
     public void test_DeleteProduct_valid(){
@@ -78,6 +82,14 @@ public class ProductServiceImplTests {
         // Assert
         verify(productRepository, never()).delete(entity);
     }
+    @Test
+    public void test_GetAllProduct(){
 
+        List<Product> products = productService.getAllProduct();
 
+        when(productRepository.findAll())
+                .thenReturn(products);
+
+        assertEquals(productRepository.count(), products.size());
+    }
 }
