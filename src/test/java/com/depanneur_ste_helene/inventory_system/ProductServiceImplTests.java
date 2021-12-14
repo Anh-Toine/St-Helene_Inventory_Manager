@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,15 +37,6 @@ public class ProductServiceImplTests {
     private final int QUANTITY_SOLD_VALID = 1;
     private final int QUANTITY_SOLD_INVALID = -1;
 
-    Product productEntity = new Product(
-            1,
-            "Doritos",
-            "Chips",
-            1,
-            2,
-            0,
-            1);
-
     @Test
     public void test_CreateProduct_valid(){
         Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
@@ -65,17 +57,13 @@ public class ProductServiceImplTests {
         });
     }
     @Test
-    public void whenValidBarcodeUpdateVisit(){
-        when(productRepository.findByBar_code(any())).thenReturn(Optional.ofNullable(productEntity));
-        when(productRepository.save(any(Product.class))).thenReturn(productEntity);
+    public void test_GetAllProduct(){
 
-        Product productFromService = productService.updateProduct(productEntity);
+        List<Product> products = productService.getAllProduct();
 
-        assertEquals(productFromService.getBar_code(), productEntity.getBar_code());
-        assertEquals(productFromService.getProduct_name(), productEntity.getProduct_name());
-        assertEquals(productFromService.getBrand(), productEntity.getBrand());
-        assertEquals(productFromService.getPrice(), productEntity.getPrice());
-        assertEquals(productFromService.getQuantity(), productEntity.getQuantity());
-        assertEquals(productFromService.getQuantity_sold(), productFromService.getQuantity_sold());
+        when(productRepository.findAll())
+                .thenReturn(products);
+
+        assertEquals(productRepository.count(), products.size());
     }
 }
