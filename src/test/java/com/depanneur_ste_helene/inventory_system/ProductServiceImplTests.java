@@ -76,6 +76,6 @@ public class ProductServiceImplTests {
         assertEquals(productFromService.getBrand(), productEntity.getBrand());
         assertEquals(productFromService.getPrice(), productEntity.getPrice());
         assertEquals(productFromService.getQuantity(), productEntity.getQuantity());
-        assertEquals(productFromService.getQuantity_sold(), productFromService.getQuantity_sold());
+        assertEquals(productFromService.getQuantity_sold(), productEntity.getQuantity_sold());
     }
 }
