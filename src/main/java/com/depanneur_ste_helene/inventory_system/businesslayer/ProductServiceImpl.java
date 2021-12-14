@@ -6,6 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
+
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ProductServiceImpl implements ProductService{
     private static final Logger LOG = LoggerFactory.getLogger(ProductServiceImpl.class);
@@ -24,9 +28,14 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.save(model);
     }
 
+
     @Override
-    public void deleteProduct(int id) {
-        productRepository.findById(id).ifPresent(p -> productRepository.delete(p));
-        LOG.debug("deleteProduct: product with id {} deleted",id);
+    public void deleteProduct(int barCode) {
+//        productRepository.findById(barCode).ifPresent(p -> productRepository.delete(p));
+        Optional<Product> optionalProduct = productRepository.findProductByBarCode(barCode);
+        if(optionalProduct.isPresent()) {
+                productRepository.deleteProduct(barCode);
+        }
+        LOG.debug("deleteProduct: product with bar code {} deleted",barCode);
     }
 }
