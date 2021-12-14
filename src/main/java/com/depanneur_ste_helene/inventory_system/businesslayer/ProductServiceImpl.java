@@ -3,13 +3,11 @@ package com.depanneur_ste_helene.inventory_system.businesslayer;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
+
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
-=======
 
 import java.util.List;
 
->>>>>>> 33602aa (Added base service for getAllProduct)
 @Service
 public class ProductServiceImpl implements ProductService{
 

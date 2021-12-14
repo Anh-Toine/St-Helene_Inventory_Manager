@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -52,5 +55,15 @@ public class ProductServiceImplTests {
         assertThrows(InvalidInputException.class, ()->{
             productService.createProduct(model);
         });
+    }
+    @Test
+    public void test_GetAllProduct(){
+
+        List<Product> products = productService.getAllProduct();
+
+        when(productRepository.findAll())
+                .thenReturn(products);
+
+        assertEquals(productRepository.count(), products.size());
     }
 }
