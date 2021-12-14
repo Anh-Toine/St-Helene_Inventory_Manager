@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,16 +69,15 @@ public class ProductServiceImplTests {
     @Test
     public void test_DeleteProduct_valid(){
         // Arrange
-        Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        when(productRepository.save(any(Product.class))).thenReturn(entity);
 
-        Product createdProduct  = productService.createProduct(model);
-
+        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
+                QUANTITY_SOLD_VALID,1);
         // Act
-        productRepository.deleteById(createdProduct.getProductId());
+        productRepository.deleteProduct(entity.getBar_code());
 
         // Assert
-        assertFalse(productRepository.existsById(createdProduct.getProductId()));
+        verify(productRepository, never()).delete(entity);
     }
+
+
 }
