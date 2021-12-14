@@ -5,9 +5,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Transactional(readOnly = true)
     List<Product> findByProductId(Integer productId);
+
+    @Transactional(readOnly = true)
+    Optional<Product> findByBar_code(Integer barcode);
 }
