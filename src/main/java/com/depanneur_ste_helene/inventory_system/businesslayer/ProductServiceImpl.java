@@ -37,7 +37,6 @@ public class ProductServiceImpl implements ProductService{
                 productRepository.deleteProduct(barCode);
         }
         LOG.debug("deleteProduct: product with bar code {} deleted",barCode);
-        return productRepository.save(model);
     }
 
     public List<Product> getAllProduct() {
