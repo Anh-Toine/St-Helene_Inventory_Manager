@@ -2,6 +2,7 @@ package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.ProductService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,7 +21,7 @@ public class ProductRESTController {
 
     @CrossOrigin
     @GetMapping("/products")
-    public List<Product> getAllProduct(){
+    public List<ProductDTO> getAllProduct(){
         return SERVICE.getAllProduct();
     }
 
@@ -29,7 +30,7 @@ public class ProductRESTController {
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 path = "/product")
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(@RequestBody Product product){
+    public ProductDTO createProduct(@RequestBody ProductDTO product){
         return SERVICE.createProduct(product);
     }
 

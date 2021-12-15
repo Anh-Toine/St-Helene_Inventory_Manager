@@ -2,16 +2,14 @@ package com.depanneur_ste_helene.inventory_system;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.ProductService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
-import jdk.jfr.Name;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ public class ProductServiceImplTests {
     @Autowired
     ProductService productService;
 
+
+
     private final int PRICE_VALID = 1;
     private final int PRICE_INVALID = -1;
 
@@ -40,56 +40,39 @@ public class ProductServiceImplTests {
     private final int QUANTITY_SOLD_VALID = 1;
     private final int QUANTITY_SOLD_INVALID = -1;
 
-    @DisplayName("Create product valid")
     @Test
     public void test_CreateProduct_valid(){
-        // Arrange
-        Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
         when(productRepository.save(any(Product.class))).thenReturn(entity);
 
-        // Act
-        Product returnedProduct = productService.createProduct(model);
+        ProductDTO returnedProduct = productService.createProduct(model);
 
-        // Assert
-        assertThat(returnedProduct.getProductId()).isEqualTo(entity.getProductId());
+        assertThat(returnedProduct.getBarCode()).isEqualTo(entity.getBarCode());
     }
-
-    @DisplayName("Create product invalid")
     @Test
     public void test_CreateProduct_not_valid(){
-        // Arrange
-        Product model = new Product(1, "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
+        ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
         when(productRepository.save(any(Product.class))).thenThrow(InvalidInputException.class);
 
-        // Assert
         assertThrows(InvalidInputException.class, ()->{
             productService.createProduct(model);
         });
     }
-
-
-    @DisplayName("Delete product valid")
-    @Test
-    public void test_DeleteProduct_valid(){
-        // Arrange
-
-        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
-                QUANTITY_SOLD_VALID,1);
-        // Act
-        productRepository.deleteProduct(entity.getBar_code());
-
-        // Assert
-        verify(productRepository, never()).delete(entity);
-    }
     @Test
     public void test_GetAllProduct(){
 
-        List<Product> products = productService.getAllProduct();
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+        products.add(new Product(2,2, "product2", "brand2", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+        products.add(new Product(3,3, "product3", "brand3", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
 
         when(productRepository.findAll())
                 .thenReturn(products);
 
-        assertEquals(productRepository.count(), products.size());
+        List<ProductDTO> productModels = productService.getAllProduct();
+
+        assertEquals(productModels.size(), 3);
     }
 }

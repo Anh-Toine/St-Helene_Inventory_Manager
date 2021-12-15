@@ -1,11 +1,6 @@
 package com.depanneur_ste_helene.inventory_system.datalayer;
-import javax.persistence.*;
 
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+public class ProductDTO {
     private Integer barCode;
     private String productName;
     private String brand;
@@ -14,8 +9,7 @@ public class Product {
     private Integer quantitySold;
     private Integer categoryId;
 
-    public Product(Integer productId, Integer barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
-        this.productId = productId;
+    public ProductDTO(Integer barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
         this.barCode = barCode;
         this.productName = productName;
         this.brand = brand;
@@ -25,16 +19,7 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Product() {
-
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public ProductDTO() {
     }
 
     public Integer getBarCode() {
