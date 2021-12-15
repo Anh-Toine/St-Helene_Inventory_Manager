@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 public class ProductRESTController {
-    @Autowired
+
     private final ProductService SERVICE;
 
     ProductRESTController(ProductService service){
