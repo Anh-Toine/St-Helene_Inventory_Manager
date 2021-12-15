@@ -1,0 +1,31 @@
+server:
+  error:
+    include-message: always
+
+logging:
+  level:
+    root: INFO
+    com.sthelene: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+spring.profiles: docker
+
+spring:
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://st-helene-db:3306/inventory_db
+    username: root
+    password: rootpwd
+    initialization-mode: always
+
+
+  # recommend setting this to "none" for production environments
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+spring.datasource.hikari.initializationFailTimeout: 60000
+
+server.port: 8080
