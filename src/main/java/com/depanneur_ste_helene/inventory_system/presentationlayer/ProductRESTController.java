@@ -34,4 +34,14 @@ public class ProductRESTController {
         return SERVICE.createProduct(product);
     }
 
+    @CrossOrigin
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+                produces = MediaType.APPLICATION_JSON_VALUE,
+                path = "/product/{barCode}")
+    public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("barCode") int barCode){
+        productDTO.setBarCode(barCode);
+        return SERVICE.updateProduct(productDTO);
+    }
+
+
 }
