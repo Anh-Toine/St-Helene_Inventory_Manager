@@ -1,18 +1,23 @@
+
+
 package com.depanneur_ste_helene.inventory_system;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.ProductService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
-import jdk.jfr.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,6 +33,9 @@ public class ProductServiceImplTests {
     @Autowired
     ProductService productService;
 
+    ProductDTO productDTO = new ProductDTO(1, "Doritos", "Chips", 1, 2, 0, 1);
+    Product productEntity = new Product(1, 1, "Doritos", "Chips", 1, 2, 0, 1);
+
     private final int PRICE_VALID = 1;
     private final int PRICE_INVALID = -1;
 
@@ -40,44 +48,68 @@ public class ProductServiceImplTests {
     @DisplayName("Create product valid")
     @Test
     public void test_CreateProduct_valid(){
-        // Arrange
-        Product model = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
         when(productRepository.save(any(Product.class))).thenReturn(entity);
 
-        // Act
-        Product returnedProduct = productService.createProduct(model);
+        ProductDTO returnedProduct = productService.createProduct(model);
 
-        // Assert
-        assertThat(returnedProduct.getProductId()).isEqualTo(entity.getProductId());
+        assertThat(returnedProduct.getBarCode()).isEqualTo(entity.getBarCode());
     }
-
-    @DisplayName("Create product invalid")
+    @DisplayName("Create product not valid")
     @Test
     public void test_CreateProduct_not_valid(){
-        // Arrange
-        Product model = new Product(1, "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
+        ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
         when(productRepository.save(any(Product.class))).thenThrow(InvalidInputException.class);
 
-        // Assert
         assertThrows(InvalidInputException.class, ()->{
             productService.createProduct(model);
         });
     }
-
-    @DisplayName("Delete product valid")
+    @DisplayName("Get all product")
     @Test
-    public void test_DeleteProduct_valid(){
+    public void test_GetAllProduct(){
+
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+        products.add(new Product(2,2, "product2", "brand2", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+        products.add(new Product(3,3, "product3", "brand3", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+
+        when(productRepository.findAll())
+                .thenReturn(products);
+
+        List<ProductDTO> productModels = productService.getAllProduct();
+
+        assertEquals(productModels.size(), 3);
+    }
+    @DisplayName("Delete product")
+    @Test
+    public void test_DeleteProduct(){
         // Arrange
 
-        Product entity = new Product(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
+        Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
                 QUANTITY_SOLD_VALID,1);
         // Act
-        productRepository.deleteProduct(entity.getBar_code());
+        productService.deleteProduct(entity.getBarCode());
 
         // Assert
         verify(productRepository, never()).delete(entity);
     }
+    @DisplayName("Update product")
+    @Test
+    public void test_UpdateProduct(){
 
+        when(productRepository.findByBarCode(any())).thenReturn(Optional.ofNullable(productEntity));
+        when(productRepository.save(any(Product.class))).thenReturn(productEntity);
 
+        ProductDTO productFromService = productService.updateProduct(productDTO);
+
+        assertEquals(productFromService.getBarCode(), productEntity.getBarCode());
+        assertEquals(productFromService.getProductName(), productEntity.getProductName());
+        assertEquals(productFromService.getBrand(), productEntity.getBrand());
+        assertEquals(productFromService.getPrice(), productEntity.getPrice());
+        assertEquals(productFromService.getQuantity(), productEntity.getQuantity());
+        assertEquals(productFromService.getQuantitySold(), productEntity.getQuantitySold());
+    }
 }
