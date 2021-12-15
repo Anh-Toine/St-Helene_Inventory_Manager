@@ -5,6 +5,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,20 @@ public class ProductServiceImplTests {
         assertThrows(InvalidInputException.class, ()->{
             productService.createProduct(model);
         });
+    }
+
+    @DisplayName("Delete product valid")
+    @Test
+    public void test_DeleteProduct_valid(){
+        // Arrange
+
+        Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
+                QUANTITY_SOLD_VALID,1);
+        // Act
+        productService.deleteProduct(entity.getBarCode());
+
+        // Assert
+        verify(productRepository, never()).delete(entity);
     }
     @Test
     public void test_GetAllProduct(){
