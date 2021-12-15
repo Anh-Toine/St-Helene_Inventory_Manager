@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService{
 
         Product entity = mapper.modelToEntity(model);
         Product newEntity = productRepository.save(entity);
+
         LOG.debug("createProduct: product with id {} saved",newEntity.getProductId());
         return mapper.entityToModel(newEntity);
     }
@@ -40,6 +41,7 @@ public class ProductServiceImpl implements ProductService{
         productRepository.findProductByBarCode(barCode).ifPresent(p -> productRepository.delete(p));
         LOG.debug("deleteProduct: product with bar code {} deleted",barCode);
     }
+
     public List<ProductDTO> getAllProduct() {
         List<Product> products = productRepository.findAll();
         List<ProductDTO> models = mapper.entityListToModelList(products);
