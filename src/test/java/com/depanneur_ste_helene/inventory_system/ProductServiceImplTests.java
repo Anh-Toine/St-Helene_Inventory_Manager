@@ -91,7 +91,11 @@ public class ProductServiceImplTests {
         assertEquals(productFromService.getBrand(), productEntity.getBrand());
         assertEquals(productFromService.getPrice(), productEntity.getPrice());
         assertEquals(productFromService.getQuantity(), productEntity.getQuantity());
+<<<<<<< HEAD
         assertEquals(productFromService.getQuantity_sold(), productFromService.getQuantity_sold());
 >>>>>>> c2686c4... This is my update branch
+=======
+        assertEquals(productFromService.getQuantity_sold(), productEntity.getQuantity_sold());
+>>>>>>> d59a0e9... Fixed lombok and test
     }
 }

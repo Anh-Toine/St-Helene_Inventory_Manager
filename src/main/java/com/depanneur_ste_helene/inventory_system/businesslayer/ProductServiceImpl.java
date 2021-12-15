@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-
 @Service
 public class ProductServiceImpl implements ProductService{
 
@@ -43,7 +42,6 @@ public class ProductServiceImpl implements ProductService{
     public Product updateProduct(Product product){
         Optional<Product> entity = productRepository.findByBar_code(product.getBar_code());
         product.setBar_code(entity.get().getBar_code());
-
         return productRepository.save(product);
     }
 }
