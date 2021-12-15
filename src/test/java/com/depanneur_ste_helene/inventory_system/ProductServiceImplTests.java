@@ -10,14 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
 import java.util.Optional;
->>>>>>> c2686c4... This is my update branch
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -69,8 +64,8 @@ public class ProductServiceImplTests {
             productService.createProduct(model);
         });
     }
+    
     @Test
-<<<<<<< HEAD
     public void test_GetAllProduct(){
 
         List<Product> products = productService.getAllProduct();
@@ -79,7 +74,9 @@ public class ProductServiceImplTests {
                 .thenReturn(products);
 
         assertEquals(productRepository.count(), products.size());
-=======
+    }
+
+    @Test
     public void whenValidBarcodeUpdateVisit(){
         when(productRepository.findByBar_code(any())).thenReturn(Optional.ofNullable(productEntity));
         when(productRepository.save(any(Product.class))).thenReturn(productEntity);
@@ -91,11 +88,6 @@ public class ProductServiceImplTests {
         assertEquals(productFromService.getBrand(), productEntity.getBrand());
         assertEquals(productFromService.getPrice(), productEntity.getPrice());
         assertEquals(productFromService.getQuantity(), productEntity.getQuantity());
-<<<<<<< HEAD
-        assertEquals(productFromService.getQuantity_sold(), productFromService.getQuantity_sold());
->>>>>>> c2686c4... This is my update branch
-=======
         assertEquals(productFromService.getQuantity_sold(), productEntity.getQuantity_sold());
->>>>>>> d59a0e9... Fixed lombok and test
     }
 }
