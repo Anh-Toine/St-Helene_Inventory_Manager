@@ -11,4 +11,6 @@ public interface ProductService {
     List<ProductDTO> getAllProduct();
 
     ProductDTO createProduct(@RequestBody ProductDTO model);
+
+    ProductDTO updateProduct(ProductDTO model);
 }

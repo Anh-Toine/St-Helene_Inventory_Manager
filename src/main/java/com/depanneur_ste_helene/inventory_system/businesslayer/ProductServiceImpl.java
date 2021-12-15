@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -30,6 +31,17 @@ public class ProductServiceImpl implements ProductService{
         Product newEntity = productRepository.save(entity);
         
         return mapper.entityToModel(newEntity);
+    }
+
+
+    public ProductDTO updateProduct(ProductDTO model) {
+        Product productEntity = mapper.modelToEntity(model);
+        Optional<Product> returnedEntity = productRepository.findByBarCode(model.getBarCode());
+
+        productEntity.setProductId(returnedEntity.get().getProductId());
+
+        Product updatedProduct = productRepository.save(productEntity);
+        return mapper.entityToModel(updatedProduct);
     }
 
     public List<ProductDTO> getAllProduct() {
