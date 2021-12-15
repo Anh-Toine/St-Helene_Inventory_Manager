@@ -34,8 +34,8 @@ public class ProductRESTController {
         return SERVICE.createProduct(product);
     }
 
-    @DeleteMapping(value = "/{bar_code}")
-    public void deleteProduct(@PathVariable("bar_code")int barCode){
+    @DeleteMapping(value = "/product/{barCode}")
+    public void deleteProduct(@PathVariable("barCode")int barCode){
         SERVICE.deleteProduct(barCode);
     }
 }
