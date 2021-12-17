@@ -43,5 +43,9 @@ public class ProductRESTController {
         return SERVICE.updateProduct(productDTO);
     }
 
-
+    @CrossOrigin
+    @DeleteMapping(path = "/product/{barCode}")
+    public void deleteProduct(@PathVariable("barCode") int barCode){
+        SERVICE.deleteProduct(barCode);
+    }
 }
