@@ -2,16 +2,31 @@ package com.depanneur_ste_helene.inventory_system.datalayer;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
+    
+    @Column(name = "bar_code", unique = true, nullable = false)
     private Integer barCode;
+    
+    @Column(name = "product_name")
     private String productName;
+    
+    @Column(name = "brand")
     private String brand;
+    
+    @Column(name = "price")
     private double price;
+    
+    @Column(name = "quantity")
     private Integer quantity;
+    
+    @Column(name = "quantity_sold")
     private Integer quantitySold;
+    
+    @Column(name = "category_id")
     private Integer categoryId;
 
     public Product(Integer productId, Integer barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
