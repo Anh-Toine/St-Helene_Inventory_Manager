@@ -28,7 +28,7 @@ public class ProductRESTController {
     @CrossOrigin
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE,
-                path = "/product")
+                path = "/products")
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDTO createProduct(@RequestBody ProductDTO product){
         return SERVICE.createProduct(product);
@@ -37,14 +37,14 @@ public class ProductRESTController {
     @CrossOrigin
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE,
-                path = "/product/{barCode}")
+                path = "/products/{barCode}")
     public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("barCode") int barCode){
         productDTO.setBarCode(barCode);
         return SERVICE.updateProduct(productDTO);
     }
 
     @CrossOrigin
-    @DeleteMapping(path = "/product/{barCode}")
+    @DeleteMapping(path = "/products/{barCode}")
     public void deleteProduct(@PathVariable("barCode") int barCode){
         SERVICE.deleteProduct(barCode);
     }

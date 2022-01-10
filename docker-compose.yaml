@@ -1,0 +1,39 @@
+services:
+  st-helene-api:
+    build:
+      context: ./
+    hostname: api
+    #mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      st-helene-db:
+        condition: service_healthy
+  st-helene-db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=inventory_db
+      - MYSQL_USER=admin1
+      - MYSQL_PASSWORD=adminPass1
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/st-helene-db:/var/lib/mysql
+      - ./src/main/resources/db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        [
+            "CMD",
+            "mysqladmin",
+            "ping",
+            "-uuser",
+            "-ppwd",
+            "-h",
+            "localhost",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
