@@ -90,11 +90,14 @@ public class ProductServiceImplTests {
 
         Product entity = new Product(1,1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
                 QUANTITY_SOLD_VALID,1);
+
+        when(productRepository.findByBarCode(entity.getBarCode())).thenReturn(Optional.of(entity));
+
         // Act
         productService.deleteProduct(entity.getBarCode());
 
         // Assert
-        verify(productRepository, never()).delete(entity);
+        verify(productRepository, times(1)).delete(entity);
     }
     @DisplayName("Update product")
     @Test
