@@ -1,13 +1,13 @@
 package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.SupplierService;
+import com.depanneur_ste_helene.inventory_system.datalayer.SupplierDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/products/{productId}/suppliers")
+import java.util.List;
+
+@RequestMapping("/suppliers")
 @RestController
 public class SupplierRESTController {
     @Autowired
@@ -19,4 +19,8 @@ public class SupplierRESTController {
 
     @CrossOrigin
     @GetMapping("/suppliers")
+    public List<SupplierDTO> getAllSuppliers(){
+        return SERVICE.getAllSuppliers();
+    }
+
 }

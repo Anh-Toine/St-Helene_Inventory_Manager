@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer supplierId;
 
     @Column(name = "supplier_name")
     private String supplierName;
@@ -22,7 +22,7 @@ public class Supplier {
     private String phoneNumber;
 
     public Supplier(Integer id, String supplierName, String representativeName, String email, String phoneNumber) {
-        Id = id;
+        supplierId = id;
         this.supplierName = supplierName;
         this.representativeName = representativeName;
         this.email = email;
@@ -32,12 +32,12 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Integer getId() {
-        return Id;
+    public Integer getsupplierId() {
+        return supplierId;
     }
 
-    public void setId(Integer id) {
-        Id = id;
+    public void setsupplierId(Integer id) {
+        supplierId = id;
     }
 
     public String getSupplierName() {
