@@ -14,4 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Transactional(readOnly = true)
     Optional<Product> findByBarCode(Integer barCode);
+
+    @Transactional(readOnly = true)
+    boolean existsByBarCode(Integer barCode);
 }

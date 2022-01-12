@@ -6,6 +6,7 @@ import com.depanneur_ste_helene.inventory_system.businesslayer.ProductService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
+import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -63,6 +64,15 @@ public class ProductServiceImplTests {
         when(productRepository.save(any(Product.class))).thenThrow(InvalidInputException.class);
 
         assertThrows(InvalidInputException.class, ()->{
+            productService.createProduct(model);
+        });
+    }
+    @DisplayName("Create product already exists")
+    @Test
+    public void test_CreateProduct_already_exists(){
+        ProductDTO model = new ProductDTO(1, "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        when(productRepository.existsByBarCode(model.getBarCode())).thenThrow(AlreadyExistsException.class);
+        assertThrows(AlreadyExistsException.class, ()->{
             productService.createProduct(model);
         });
     }

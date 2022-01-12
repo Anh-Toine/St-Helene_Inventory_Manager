@@ -3,6 +3,7 @@ package com.depanneur_ste_helene.inventory_system.businesslayer;
 import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
+import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
@@ -23,13 +24,18 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public ProductDTO createProduct(ProductDTO model) {
+
+        if(productRepository.existsByBarCode(model.getBarCode())){
+            throw new AlreadyExistsException("Product of the same barcode already exists");
+        }
+
         if(model.getPrice() < 0 || model.getQuantity() < 0 || model.getQuantitySold() < 0){
             throw new InvalidInputException("Input not valid");
         }
 
         Product entity = mapper.modelToEntity(model);
         Product newEntity = productRepository.save(entity);
-        
+
         return mapper.entityToModel(newEntity);
     }
 
