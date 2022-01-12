@@ -13,8 +13,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByProductId(Integer productId);
 
     @Transactional(readOnly = true)
-    Optional<Product> findByBarCode(Integer barCode);
+    Optional<Product> findByBarCode(String barCode);
 
     @Transactional(readOnly = true)
-    boolean existsByBarCode(Integer barCode);
+    boolean existsByBarCode(String barCode);
 }

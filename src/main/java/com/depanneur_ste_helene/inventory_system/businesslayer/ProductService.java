@@ -15,5 +15,5 @@ public interface ProductService {
 
     ProductDTO updateProduct(ProductDTO model);
 
-    void deleteProduct(int barCode);
+    void deleteProduct(String barCode);
 }

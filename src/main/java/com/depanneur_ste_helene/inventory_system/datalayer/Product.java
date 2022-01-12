@@ -9,7 +9,7 @@ public class Product {
     private Integer productId;
     
     @Column(name = "bar_code", unique = true, nullable = false)
-    private Integer barCode;
+    private String barCode;
     
     @Column(name = "product_name")
     private String productName;
@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "category_id")
     private Integer categoryId;
 
-    public Product(Integer productId, Integer barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+    public Product(Integer productId, String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
         this.productId = productId;
         this.barCode = barCode;
         this.productName = productName;
@@ -52,11 +52,11 @@ public class Product {
         this.productId = productId;
     }
 
-    public Integer getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(Integer barCode) {
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
