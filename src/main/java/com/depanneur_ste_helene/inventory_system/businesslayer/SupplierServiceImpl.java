@@ -26,13 +26,17 @@ public class SupplierServiceImpl implements SupplierService{
     }
 
     @Override
-    public SupplierDTO createSupplier(SupplierDTO supplier) {
-        if(supplier.getSupplierName().equals("") ||
-                supplier.getRepresentativeName().equals("") ||
-                supplier.getEmail().equals("") ||
-                supplier.getPhoneNumber().equals("")){
-            throw new InvalidInputException("Input not valid");
+    public SupplierDTO createSupplier(SupplierDTO model) {
+        if(model.getSupplierName().isBlank() ||
+                model.getRepresentativeName().isBlank() ||
+                model.getEmail().isBlank() ||
+                model.getPhoneNumber().isBlank()){
+            throw new InvalidInputException("Input not valid: one field is blank");
         }
-        return null;
+
+        Supplier supplierEntity = supplierMapper.modelToEntity(model);
+        Supplier newEntity = supplierRespository.save(supplierEntity);
+
+        return supplierMapper.entityToModel(newEntity);
     }
 }
