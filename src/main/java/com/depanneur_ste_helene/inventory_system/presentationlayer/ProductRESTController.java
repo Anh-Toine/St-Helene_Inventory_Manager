@@ -38,14 +38,14 @@ public class ProductRESTController {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 path = "/products/{barCode}")
-    public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("barCode") int barCode){
+    public ProductDTO update(@RequestBody ProductDTO productDTO, @PathVariable("barCode") String barCode){
         productDTO.setBarCode(barCode);
         return SERVICE.updateProduct(productDTO);
     }
 
     @CrossOrigin
     @DeleteMapping(path = "/products/{barCode}")
-    public void deleteProduct(@PathVariable("barCode") int barCode){
+    public void deleteProduct(@PathVariable("barCode") String barCode){
         SERVICE.deleteProduct(barCode);
     }
 }

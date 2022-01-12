@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS product;
 
 CREATE TABLE IF NOT EXISTS product (
     product_id INT(4) AUTO_INCREMENT PRIMARY KEY,
-    bar_code INT(100) NOT NULL UNIQUE,
+    bar_code VARCHAR(255) NOT NULL UNIQUE,
     brand VARCHAR(255),
     category_id INT(100),
     price DOUBLE,

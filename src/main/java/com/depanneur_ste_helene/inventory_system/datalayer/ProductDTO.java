@@ -1,7 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.datalayer;
 
 public class ProductDTO {
-    private Integer barCode;
+    private String barCode;
     private String productName;
     private String brand;
     private double price;
@@ -9,7 +9,7 @@ public class ProductDTO {
     private Integer quantitySold;
     private Integer categoryId;
 
-    public ProductDTO(Integer barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+    public ProductDTO(String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
         this.barCode = barCode;
         this.productName = productName;
         this.brand = brand;
@@ -22,11 +22,11 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public Integer getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(Integer barCode) {
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
@@ -70,9 +70,7 @@ public class ProductDTO {
         this.quantitySold = quantitySold;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
+    public Integer getCategoryId() { return categoryId; }
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;

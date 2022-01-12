@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(int barCode) {
+    public void deleteProduct(String barCode) {
         productRepository.findByBarCode(barCode).ifPresent(p -> productRepository.delete(p));
     }
 
