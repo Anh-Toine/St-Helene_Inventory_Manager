@@ -9,4 +9,5 @@ public interface SupplierService {
 
     List<SupplierDTO> getAllSuppliers();
 
+    SupplierDTO createSupplier(@RequestBody SupplierDTO supplier);
 }
