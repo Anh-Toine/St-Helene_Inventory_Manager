@@ -4,6 +4,7 @@ import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Category;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryRepository;
+import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -42,5 +44,17 @@ public class CategoryServiceImplTests {
         List<CategoryDTO> categoryModels = categoryService.getAllCategory();
 
         assertEquals(categoryModels.size(),3);
+    }
+
+    @DisplayName("Create new category")
+    @Test
+    public void test_CreateCategory(){
+        CategoryDTO model = new CategoryDTO("1",false,0.00);
+
+        when(categoryRepository.existsByCategoryName(model.getCategoryName())).thenReturn(true);
+
+        assertThrows(AlreadyExistsException.class, ()->{
+            categoryService.createCategory(model);
+        });
     }
 }
