@@ -49,7 +49,7 @@ public class CategoryServiceImplTests {
         assertEquals(categoryModels.size(),3);
     }
 
-    @DisplayName("Create category that already exists")
+    @DisplayName("Create a new category")
     @Test
     public void test_CreateCategory(){
         CategoryDTO model = new CategoryDTO("1",false,0.00);
