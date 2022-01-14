@@ -71,7 +71,9 @@ public class ProductServiceImplTests {
     @Test
     public void test_CreateProduct_already_exists(){
         ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        when(productRepository.existsByBarCode(model.getBarCode())).thenThrow(AlreadyExistsException.class);
+
+        when(productRepository.existsByBarCode(model.getBarCode())).thenReturn(true);
+
         assertThrows(AlreadyExistsException.class, ()->{
             productService.createProduct(model);
         });
