@@ -4,6 +4,7 @@ import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Category;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryRepository;
+import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -46,9 +49,22 @@ public class CategoryServiceImplTests {
         assertEquals(categoryModels.size(),3);
     }
 
-    @DisplayName("Create new category")
+    @DisplayName("Create category that already exists")
     @Test
     public void test_CreateCategory(){
+        CategoryDTO model = new CategoryDTO("1",false,0.00);
+        Category entity = new Category(1,"1",false,0.00);
+
+        when(categoryRepository.save(any(Category.class))).thenReturn(entity);
+
+        CategoryDTO returnedModel = categoryService.createCategory(model);
+
+        assertThat(returnedModel.getCategoryName()).isEqualTo(model.getCategoryName());
+    }
+
+    @DisplayName("Create category that already exists")
+    @Test
+    public void test_CreateCategory_already_exists(){
         CategoryDTO model = new CategoryDTO("1",false,0.00);
 
         when(categoryRepository.existsByCategoryName(model.getCategoryName())).thenReturn(true);
