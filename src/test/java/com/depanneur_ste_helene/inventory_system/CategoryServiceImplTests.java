@@ -4,7 +4,6 @@ import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Category;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryRepository;
-import com.depanneur_ste_helene.inventory_system.datalayer.Product;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -72,5 +72,17 @@ public class CategoryServiceImplTests {
         assertThrows(AlreadyExistsException.class, ()->{
             categoryService.createCategory(model);
         });
+    }
+
+    @DisplayName("Delete category")
+    @Test
+    public void test_DeleteCategory(){
+        Category entity = new Category(1,"1",false,0.00);
+
+        when(categoryRepository.findByCategoryName(entity.getCategoryName())).thenReturn(Optional.of(entity));
+
+        categoryService.deleteCategory(entity.getCategoryName());
+
+        verify(categoryRepository, times(1)).delete(entity);
     }
 }
