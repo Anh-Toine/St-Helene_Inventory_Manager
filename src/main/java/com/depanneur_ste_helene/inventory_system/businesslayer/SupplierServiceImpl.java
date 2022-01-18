@@ -3,10 +3,13 @@ package com.depanneur_ste_helene.inventory_system.businesslayer;
 import com.depanneur_ste_helene.inventory_system.datalayer.Supplier;
 import com.depanneur_ste_helene.inventory_system.datalayer.SupplierDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.SupplierRepository;
+import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 import org.springframework.stereotype.Service;
 
+import java.rmi.AlreadyBoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SupplierServiceImpl implements SupplierService{
@@ -34,9 +37,31 @@ public class SupplierServiceImpl implements SupplierService{
             throw new InvalidInputException("Input not valid: one field is blank");
         }
 
+        if(supplierRespository.existsBySupplierName(model.getSupplierName())){
+            throw new AlreadyExistsException("Input not valid: supplier already exists!");
+        }
+
         Supplier supplierEntity = supplierMapper.modelToEntity(model);
         Supplier newEntity = supplierRespository.save(supplierEntity);
 
         return supplierMapper.entityToModel(newEntity);
+    }
+
+    @Override
+    public SupplierDTO updateSupplier(SupplierDTO model) {
+        Supplier supplierEntity = supplierMapper.modelToEntity(model);
+        Optional<Supplier> returnedEntity =
+                supplierRespository.findBySupplierName(model.getSupplierName());
+
+        supplierEntity.setSupplierId(returnedEntity.get().getSupplierId());
+
+        Supplier updatedSupplier = supplierRespository.save(supplierEntity);
+
+        return  supplierMapper.entityToModel(updatedSupplier);
+    }
+
+    @Override
+    public void deleteSupplier(String supplierName) {
+
     }
 }

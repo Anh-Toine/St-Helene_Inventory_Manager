@@ -10,8 +10,11 @@ import java.util.Optional;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     @Transactional(readOnly = true)
-    Optional<Supplier> findSupplierBySupplierName(String name);
+    Optional<Supplier> findBySupplierName(String name);
 
     @Transactional(readOnly = true)
     List<Supplier> findBySupplierId(Integer supplierId);
+
+    @Transactional(readOnly = true)
+    boolean existsBySupplierName(String supplierName);
 }

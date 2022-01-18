@@ -9,5 +9,9 @@ public interface SupplierService {
 
     List<SupplierDTO> getAllSuppliers();
 
-    SupplierDTO createSupplier(@RequestBody SupplierDTO supplier);
+    SupplierDTO createSupplier(@RequestBody SupplierDTO model);
+
+    SupplierDTO updateSupplier(SupplierDTO model);
+
+    void deleteSupplier(String supplierName);
 }
