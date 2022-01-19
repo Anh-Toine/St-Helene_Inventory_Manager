@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -109,5 +109,17 @@ public class SupplierServiceImplTests {
         assertEquals(capturedSupplier.getRepresentativeName(), entity.getRepresentativeName());
         assertEquals(capturedSupplier.getEmail(), entity.getEmail());
         assertEquals(capturedSupplier.getPhoneNumber(), entity.getPhoneNumber());
+    }
+
+    @DisplayName("Delete supplier")
+    @Test
+    public void test_deleteSupplier(){
+        // Arrange
+        Supplier entity = new Supplier(1,"Foo","FooRep","foo@email.com","111-111-1111");
+        when(supplierRespository.findBySupplierName(entity.getSupplierName())).thenReturn(Optional.of(entity));
+        // Act
+        supplierService.deleteSupplier(entity.getSupplierName());
+        // Assert
+        verify(supplierRespository, times(1)).delete(entity);
     }
 }

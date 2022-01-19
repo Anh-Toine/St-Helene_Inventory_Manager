@@ -62,6 +62,6 @@ public class SupplierServiceImpl implements SupplierService{
 
     @Override
     public void deleteSupplier(String supplierName) {
-
+        supplierRespository.findBySupplierName(supplierName).ifPresent(s -> supplierRespository.delete(s));
     }
 }

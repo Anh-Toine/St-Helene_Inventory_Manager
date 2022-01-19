@@ -37,7 +37,13 @@ public class SupplierRESTController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             path = "/suppliers/{supplierName}")
     public SupplierDTO updateSupplier(@RequestBody SupplierDTO supplierDTO, @PathVariable("supplierName") String supplierName){
-       supplierDTO.setSupplierName(supplierName);
+        supplierDTO.setSupplierName(supplierName);
         return SERVICE.updateSupplier(supplierDTO);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/suppliers")
+    public void deleteSupplier(String supplierName){
+        SERVICE.deleteSupplier(supplierName);
     }
 }
