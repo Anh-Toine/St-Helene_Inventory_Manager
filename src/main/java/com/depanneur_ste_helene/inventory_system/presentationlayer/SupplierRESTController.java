@@ -42,8 +42,8 @@ public class SupplierRESTController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/suppliers")
-    public void deleteSupplier(String supplierName){
+    @DeleteMapping("/suppliers/{supplierName}")
+    public void deleteSupplier(@PathVariable("supplierName") String supplierName){
         SERVICE.deleteSupplier(supplierName);
     }
 }
