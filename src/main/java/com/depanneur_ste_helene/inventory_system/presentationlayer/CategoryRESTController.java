@@ -32,6 +32,15 @@ public class CategoryRESTController {
     public CategoryDTO createCategory(@RequestBody CategoryDTO category){return SERVICE.createCategory(category);}
 
     @CrossOrigin
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/categories/{categoryName}")
+    public CategoryDTO updateCategory(@RequestBody CategoryDTO category, @PathVariable("categoryName") String categoryName){
+        category.setCategoryName(categoryName);
+        return SERVICE.updateCategory(category);
+    }
+
+    @CrossOrigin
     @DeleteMapping(path = "/categories/{categoryName}")
     public void deleteCategory(@PathVariable String categoryName){SERVICE.deleteCategory(categoryName);}
 }
