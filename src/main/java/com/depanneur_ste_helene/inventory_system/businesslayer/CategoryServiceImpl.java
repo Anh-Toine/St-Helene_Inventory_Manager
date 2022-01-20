@@ -24,7 +24,6 @@ public class CategoryServiceImpl implements CategoryService{
         return models;
     }
 
-    @Override
     public CategoryDTO createCategory(CategoryDTO model) {
         if(categoryRepository.existsByCategoryName(model.getCategoryName())){
             throw new AlreadyExistsException("A category of the same name already exists");
@@ -35,4 +34,10 @@ public class CategoryServiceImpl implements CategoryService{
 
         return mapper.entityToModel(newEntity);
     }
+
+    public void deleteCategory(String categoryName) {
+        categoryRepository.findByCategoryName(categoryName).ifPresent(p -> categoryRepository.delete(p));
+    }
+
+
 }

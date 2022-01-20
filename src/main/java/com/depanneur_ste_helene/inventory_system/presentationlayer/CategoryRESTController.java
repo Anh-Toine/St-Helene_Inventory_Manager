@@ -30,4 +30,8 @@ public class CategoryRESTController {
             path = "/categories")
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDTO createCategory(@RequestBody CategoryDTO category){return SERVICE.createCategory(category);}
+
+    @CrossOrigin
+    @DeleteMapping(path = "/categories/{categoryName}")
+    public void deleteCategory(@PathVariable String categoryName){SERVICE.deleteCategory(categoryName);}
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface CategoryService {
     List<CategoryDTO> getAllCategory();
     CategoryDTO createCategory(@RequestBody CategoryDTO model);
+    void deleteCategory(String categoryName);
 }
