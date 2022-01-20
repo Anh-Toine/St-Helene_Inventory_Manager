@@ -31,4 +31,19 @@ public class SupplierRESTController {
     public SupplierDTO createSupplier(@RequestBody SupplierDTO supplier){
         return SERVICE.createSupplier(supplier);
     }
+
+    @CrossOrigin
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/suppliers/{supplierName}")
+    public SupplierDTO updateSupplier(@RequestBody SupplierDTO supplierDTO, @PathVariable("supplierName") String supplierName){
+        supplierDTO.setSupplierName(supplierName);
+        return SERVICE.updateSupplier(supplierDTO);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/suppliers/{supplierName}")
+    public void deleteSupplier(@PathVariable("supplierName") String supplierName){
+        SERVICE.deleteSupplier(supplierName);
+    }
 }

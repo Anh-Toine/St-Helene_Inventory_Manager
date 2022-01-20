@@ -15,12 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -91,5 +92,34 @@ public class SupplierServiceImplTests {
         assertThrows(InvalidInputException.class, ()->{
             supplierService.createSupplier(dto);
         });
+    }
+
+    @DisplayName("Update supplier")
+    @Test
+    public void test_UpdateSupplier(){
+        // Arrange
+        Supplier entity = new Supplier(1,"Foo","FooRep","foo@email.com","111-111-1111");
+        SupplierDTO model = new SupplierDTO("Foo","FooRep","foo@email.com","111-111-1111");
+        // Act
+        when(supplierRespository.findBySupplierName(any())).thenReturn(Optional.ofNullable(entity));
+        when(supplierRespository.save(any(Supplier.class))).thenReturn(entity);
+        SupplierDTO capturedSupplier = supplierService.updateSupplier(model);
+        // Assert
+        assertEquals(capturedSupplier.getSupplierName(), entity.getSupplierName());
+        assertEquals(capturedSupplier.getRepresentativeName(), entity.getRepresentativeName());
+        assertEquals(capturedSupplier.getEmail(), entity.getEmail());
+        assertEquals(capturedSupplier.getPhoneNumber(), entity.getPhoneNumber());
+    }
+
+    @DisplayName("Delete supplier")
+    @Test
+    public void test_deleteSupplier(){
+        // Arrange
+        Supplier entity = new Supplier(1,"Foo","FooRep","foo@email.com","111-111-1111");
+        when(supplierRespository.findBySupplierName(entity.getSupplierName())).thenReturn(Optional.of(entity));
+        // Act
+        supplierService.deleteSupplier(entity.getSupplierName());
+        // Assert
+        verify(supplierRespository, times(1)).delete(entity);
     }
 }

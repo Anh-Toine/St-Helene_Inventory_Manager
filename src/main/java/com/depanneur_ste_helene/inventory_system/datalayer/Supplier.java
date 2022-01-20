@@ -32,11 +32,11 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Integer getsupplierId() {
+    public Integer getSupplierId() {
         return supplierId;
     }
 
-    public void setsupplierId(Integer id) {
+    public void setSupplierId(Integer id) {
         supplierId = id;
     }
 
