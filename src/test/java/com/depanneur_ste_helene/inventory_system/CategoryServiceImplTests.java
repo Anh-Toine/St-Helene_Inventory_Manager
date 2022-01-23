@@ -74,6 +74,24 @@ public class CategoryServiceImplTests {
         });
     }
 
+    @DisplayName("Update category")
+    @Test
+    public void test_UpdateCategory(){
+        Category entity = new Category(1,"1",false,0.00);
+
+        Category updateEntity = new Category(1,"1",true,0.15);
+        CategoryDTO updateModel = new CategoryDTO("1",true,0.15);
+
+        when(categoryRepository.findByCategoryName(any(String.class))).thenReturn(Optional.of(entity));
+        when(categoryRepository.save(any(Category.class))).thenReturn(updateEntity);
+
+        CategoryDTO returnedUpdateModel = categoryService.updateCategory(updateModel);
+
+        assertThat(returnedUpdateModel.getCategoryName()).isEqualTo(updateModel.getCategoryName());
+        assertThat(returnedUpdateModel.isTaxable()).isEqualTo(updateModel.isTaxable());
+        assertThat(returnedUpdateModel.getTax()).isEqualTo(updateModel.getTax());
+    }
+
     @DisplayName("Delete category")
     @Test
     public void test_DeleteCategory(){

@@ -5,6 +5,7 @@ import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsExcepti
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -33,6 +34,16 @@ public class CategoryServiceImpl implements CategoryService{
         Category newEntity = categoryRepository.save(entity);
 
         return mapper.entityToModel(newEntity);
+    }
+
+    public CategoryDTO updateCategory(CategoryDTO model){
+        Category categoryEntity = mapper.modelToEntity(model);
+        Optional<Category> returnedEntity = categoryRepository.findByCategoryName(model.getCategoryName());
+
+        categoryEntity.setCategoryId(returnedEntity.get().getCategoryId());
+
+        Category updateCategory = categoryRepository.save(categoryEntity);
+        return mapper.entityToModel(updateCategory);
     }
 
     public void deleteCategory(String categoryName) {

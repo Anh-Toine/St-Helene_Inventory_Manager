@@ -57,6 +57,7 @@ public class ProductServiceImplTests {
 
         assertThat(returnedProduct.getBarCode()).isEqualTo(entity.getBarCode());
     }
+
     @DisplayName("Create product not valid")
     @Test
     public void test_CreateProduct_not_valid(){
@@ -67,6 +68,7 @@ public class ProductServiceImplTests {
             productService.createProduct(model);
         });
     }
+
     @DisplayName("Create product already exists")
     @Test
     public void test_CreateProduct_already_exists(){
@@ -78,6 +80,7 @@ public class ProductServiceImplTests {
             productService.createProduct(model);
         });
     }
+
     @DisplayName("Get all product")
     @Test
     public void test_GetAllProduct(){
@@ -95,6 +98,7 @@ public class ProductServiceImplTests {
 
         assertEquals(productModels.size(), 3);
     }
+
     @DisplayName("Delete product")
     @Test
     public void test_DeleteProduct(){
@@ -111,6 +115,7 @@ public class ProductServiceImplTests {
         // Assert
         verify(productRepository, times(1)).delete(entity);
     }
+
     @DisplayName("Update product")
     @Test
     public void test_UpdateProduct(){
