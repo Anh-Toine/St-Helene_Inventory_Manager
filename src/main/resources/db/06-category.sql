@@ -1,2 +1,2 @@
-INSERT IGNORE INTO category VALUES (1, 'grocery_tax', 1, 0.15);
-INSERT IGNORE INTO category VALUES (2, 'grocery_non_tax', 0, 0.00);
+INSERT IGNORE INTO category VALUES (1, '3f471a90-6d2f-4d89-a6e5-dc521bd42e36', 'grocery_tax', 1, 0.15);
+INSERT IGNORE INTO category VALUES (2, '3f471a90-6d2f-4d89-a8t5-dc521bd42e36','grocery_non_tax', 0, 0.00);

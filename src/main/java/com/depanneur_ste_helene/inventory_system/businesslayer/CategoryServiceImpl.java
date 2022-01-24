@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -25,12 +26,12 @@ public class CategoryServiceImpl implements CategoryService{
         return models;
     }
 
-    public CategoryDTO createCategory(CategoryDTO model) {
+    public CategoryDTO createCategory(CategoryCreateDTO model) {
         if(categoryRepository.existsByCategoryName(model.getCategoryName())){
             throw new AlreadyExistsException("A category of the same name already exists");
         }
 
-        Category entity = mapper.modelToEntity(model);
+        Category entity = mapper.createDTOToEntity(model);
         Category newEntity = categoryRepository.save(entity);
 
         return mapper.entityToModel(newEntity);
@@ -38,16 +39,16 @@ public class CategoryServiceImpl implements CategoryService{
 
     public CategoryDTO updateCategory(CategoryDTO model){
         Category categoryEntity = mapper.modelToEntity(model);
-        Optional<Category> returnedEntity = categoryRepository.findByCategoryName(model.getCategoryName());
+        Optional<Category> returnedEntity = categoryRepository.findByCategoryId(UUID.fromString(model.getCategoryId()));
 
-        categoryEntity.setCategoryId(returnedEntity.get().getCategoryId());
+        categoryEntity.setId(returnedEntity.get().getId());
 
         Category updateCategory = categoryRepository.save(categoryEntity);
         return mapper.entityToModel(updateCategory);
     }
 
-    public void deleteCategory(String categoryName) {
-        categoryRepository.findByCategoryName(categoryName).ifPresent(p -> categoryRepository.delete(p));
+    public void deleteCategory(String categoryId) {
+        categoryRepository.findByCategoryId(UUID.fromString(categoryId)).ifPresent(p -> categoryRepository.delete(p));
     }
 
 

@@ -2,6 +2,7 @@ package com.depanneur_ste_helene.inventory_system;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
 import com.depanneur_ste_helene.inventory_system.datalayer.Category;
+import com.depanneur_ste_helene.inventory_system.datalayer.CategoryCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,9 +40,9 @@ public class CategoryServiceImplTests {
     public void test_GetAllCategory(){
         List<Category> categories = new ArrayList<>();
 
-        categories.add(new Category(1,"1",false,0.00));
-        categories.add(new Category(2,"2",true,0.15));
-        categories.add(new Category(3,"3",false,0.00));
+        categories.add(new Category(1, UUID.randomUUID(),"1",false,0.00));
+        categories.add(new Category(2,UUID.randomUUID(),"2",true,0.15));
+        categories.add(new Category(3,UUID.randomUUID(),"3",false,0.00));
 
         when(categoryRepository.findAll()).thenReturn(categories);
 
@@ -52,37 +54,39 @@ public class CategoryServiceImplTests {
     @DisplayName("Create a new category")
     @Test
     public void test_CreateCategory(){
-        CategoryDTO model = new CategoryDTO("1",false,0.00);
-        Category entity = new Category(1,"1",false,0.00);
+        CategoryCreateDTO newCategory = new CategoryCreateDTO("1",false,0.00);
+        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
 
         when(categoryRepository.save(any(Category.class))).thenReturn(entity);
 
-        CategoryDTO returnedModel = categoryService.createCategory(model);
+        CategoryDTO returnedModel = categoryService.createCategory(newCategory);
 
-        assertThat(returnedModel.getCategoryName()).isEqualTo(model.getCategoryName());
+        assertThat(returnedModel.getCategoryName()).isEqualTo(newCategory.getCategoryName());
     }
 
     @DisplayName("Create category that already exists")
     @Test
     public void test_CreateCategory_already_exists(){
-        CategoryDTO model = new CategoryDTO("1",false,0.00);
+        CategoryCreateDTO newCategory = new CategoryCreateDTO("1",false,0.00);
 
-        when(categoryRepository.existsByCategoryName(model.getCategoryName())).thenReturn(true);
+        when(categoryRepository.existsByCategoryName(newCategory.getCategoryName())).thenReturn(true);
 
         assertThrows(AlreadyExistsException.class, ()->{
-            categoryService.createCategory(model);
+            categoryService.createCategory(newCategory);
         });
     }
 
     @DisplayName("Update category")
     @Test
     public void test_UpdateCategory(){
-        Category entity = new Category(1,"1",false,0.00);
+        UUID categoryUUID = UUID.randomUUID();
 
-        Category updateEntity = new Category(1,"1",true,0.15);
-        CategoryDTO updateModel = new CategoryDTO("1",true,0.15);
+        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
 
-        when(categoryRepository.findByCategoryName(any(String.class))).thenReturn(Optional.of(entity));
+        Category updateEntity = new Category(1,categoryUUID,"1",true,0.15);
+        CategoryDTO updateModel = new CategoryDTO(categoryUUID.toString(),"1",true,0.15);
+
+        when(categoryRepository.findByCategoryId(any(UUID.class))).thenReturn(Optional.of(entity));
         when(categoryRepository.save(any(Category.class))).thenReturn(updateEntity);
 
         CategoryDTO returnedUpdateModel = categoryService.updateCategory(updateModel);
@@ -95,11 +99,11 @@ public class CategoryServiceImplTests {
     @DisplayName("Delete category")
     @Test
     public void test_DeleteCategory(){
-        Category entity = new Category(1,"1",false,0.00);
+        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
 
-        when(categoryRepository.findByCategoryName(entity.getCategoryName())).thenReturn(Optional.of(entity));
+        when(categoryRepository.findByCategoryId(any(UUID.class))).thenReturn(Optional.of(entity));
 
-        categoryService.deleteCategory(entity.getCategoryName());
+        categoryService.deleteCategory(entity.getCategoryId().toString());
 
         verify(categoryRepository, times(1)).delete(entity);
     }

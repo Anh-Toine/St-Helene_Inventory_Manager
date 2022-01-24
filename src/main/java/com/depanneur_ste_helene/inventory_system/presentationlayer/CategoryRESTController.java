@@ -1,6 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
+import com.depanneur_ste_helene.inventory_system.datalayer.CategoryCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,18 +30,18 @@ public class CategoryRESTController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             path = "/categories")
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoryDTO createCategory(@RequestBody CategoryDTO category){return SERVICE.createCategory(category);}
+    public CategoryDTO createCategory(@RequestBody CategoryCreateDTO newCategory){return SERVICE.createCategory(newCategory);}
 
     @CrossOrigin
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
-            path = "/categories/{categoryName}")
-    public CategoryDTO updateCategory(@RequestBody CategoryDTO category, @PathVariable("categoryName") String categoryName){
-        category.setCategoryName(categoryName);
+            path = "/categories/{categoryId}")
+    public CategoryDTO updateCategory(@RequestBody CategoryDTO category, @PathVariable("categoryId") String categoryId){
+        category.setCategoryId(categoryId);
         return SERVICE.updateCategory(category);
     }
 
     @CrossOrigin
-    @DeleteMapping(path = "/categories/{categoryName}")
-    public void deleteCategory(@PathVariable String categoryName){SERVICE.deleteCategory(categoryName);}
+    @DeleteMapping(path = "/categories/{categoryId}")
+    public void deleteCategory(@PathVariable String categoryId){SERVICE.deleteCategory(categoryId);}
 }

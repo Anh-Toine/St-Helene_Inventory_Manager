@@ -1,12 +1,16 @@
 package com.depanneur_ste_helene.inventory_system.datalayer;
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer categoryId;
+    private Integer id;
+
+    @Column(name = "category_id")
+    private UUID categoryId = UUID.randomUUID();
 
     @Column(name = "category_name")
     private String categoryName;
@@ -17,7 +21,8 @@ public class Category {
     @Column(name = "tax")
     private double tax;
 
-    public Category(Integer categoryId, String categoryName, boolean taxable, double tax) {
+    public Category(Integer id, UUID categoryId, String categoryName, boolean taxable, double tax) {
+        this.id = id;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.taxable = taxable;
@@ -27,11 +32,19 @@ public class Category {
     public Category() {
     }
 
-    public Integer getCategoryId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public UUID getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(UUID categoryId) {
         this.categoryId = categoryId;
     }
 
