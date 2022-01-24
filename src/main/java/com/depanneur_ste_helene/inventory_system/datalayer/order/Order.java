@@ -28,6 +28,10 @@ public class Order {
         this.supplierId = supplierId;
     }
 
+    public Order() {
+
+    }
+
     public Date getOrderDate() {
         return orderDate;
     }
@@ -59,5 +63,5 @@ public class Order {
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
     }
-    
+
 }
