@@ -5,9 +5,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface CategoryRepository extends JpaRepository <Category, Integer>{
+
+    @Transactional(readOnly = true)
+    Optional<Category> findByCategoryId(UUID categoryId);
 
     @Transactional(readOnly = true)
     Optional<Category> findByCategoryName(String categoryName);

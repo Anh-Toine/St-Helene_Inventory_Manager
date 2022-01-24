@@ -1,8 +1,6 @@
 package com.depanneur_ste_helene.inventory_system.datalayer;
 
-public class CategoryDTO {
-
-    private String categoryId;
+public class CategoryCreateDTO {
 
     private String categoryName;
 
@@ -10,22 +8,13 @@ public class CategoryDTO {
 
     private double tax;
 
-    public CategoryDTO(String categoryId, String categoryName, boolean taxable, double tax) {
-        this.categoryId = categoryId;
+    public CategoryCreateDTO(String categoryName, boolean taxable, double tax) {
         this.categoryName = categoryName;
         this.taxable = taxable;
         this.tax = tax;
     }
 
-    public CategoryDTO() {
-    }
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public CategoryCreateDTO() {
     }
 
     public String getCategoryName() {
