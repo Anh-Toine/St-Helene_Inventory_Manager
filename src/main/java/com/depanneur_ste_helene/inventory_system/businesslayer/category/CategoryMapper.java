@@ -1,8 +1,8 @@
-package com.depanneur_ste_helene.inventory_system.businesslayer;
+package com.depanneur_ste_helene.inventory_system.businesslayer.category;
 
-import com.depanneur_ste_helene.inventory_system.datalayer.Category;
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryCreateDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.Category;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryCreateDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

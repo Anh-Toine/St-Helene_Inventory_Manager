@@ -1,9 +1,9 @@
 package com.depanneur_ste_helene.inventory_system;
 
-import com.depanneur_ste_helene.inventory_system.businesslayer.SupplierService;
-import com.depanneur_ste_helene.inventory_system.datalayer.Supplier;
-import com.depanneur_ste_helene.inventory_system.datalayer.SupplierDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.SupplierRepository;
+import com.depanneur_ste_helene.inventory_system.businesslayer.supplier.SupplierService;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.Supplier;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

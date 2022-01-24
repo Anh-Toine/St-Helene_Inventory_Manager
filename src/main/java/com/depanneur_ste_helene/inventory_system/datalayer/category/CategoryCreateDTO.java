@@ -1,4 +1,4 @@
-package com.depanneur_ste_helene.inventory_system.datalayer;
+package com.depanneur_ste_helene.inventory_system.datalayer.category;
 
 public class CategoryCreateDTO {
 

@@ -1,7 +1,7 @@
-package com.depanneur_ste_helene.inventory_system.businesslayer;
+package com.depanneur_ste_helene.inventory_system.businesslayer.category;
 
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryCreateDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryCreateDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryDTO;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;

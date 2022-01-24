@@ -1,15 +1,36 @@
-package com.depanneur_ste_helene.inventory_system.datalayer;
+package com.depanneur_ste_helene.inventory_system.datalayer.product;
+import javax.persistence.*;
 
-public class ProductDTO {
+@Entity
+@Table(name = "product")
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer productId;
+    
+    @Column(name = "bar_code", unique = true, nullable = false)
     private String barCode;
+    
+    @Column(name = "product_name")
     private String productName;
+    
+    @Column(name = "brand")
     private String brand;
+    
+    @Column(name = "price")
     private double price;
+    
+    @Column(name = "quantity")
     private Integer quantity;
+    
+    @Column(name = "quantity_sold")
     private Integer quantitySold;
+    
+    @Column(name = "category_id")
     private Integer categoryId;
 
-    public ProductDTO(String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+    public Product(Integer productId, String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+        this.productId = productId;
         this.barCode = barCode;
         this.productName = productName;
         this.brand = brand;
@@ -19,7 +40,16 @@ public class ProductDTO {
         this.categoryId = categoryId;
     }
 
-    public ProductDTO() {
+    public Product() {
+
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public String getBarCode() {
@@ -70,7 +100,9 @@ public class ProductDTO {
         this.quantitySold = quantitySold;
     }
 
-    public Integer getCategoryId() { return categoryId; }
+    public Integer getCategoryId() {
+        return categoryId;
+    }
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;

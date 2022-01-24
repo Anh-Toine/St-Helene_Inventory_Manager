@@ -1,8 +1,8 @@
-package com.depanneur_ste_helene.inventory_system.businesslayer;
+package com.depanneur_ste_helene.inventory_system.businesslayer.product;
 
-import com.depanneur_ste_helene.inventory_system.datalayer.Product;
-import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import org.springframework.stereotype.Service;
 
