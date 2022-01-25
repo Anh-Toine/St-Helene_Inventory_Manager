@@ -1,45 +1,19 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.order;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "order")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
-
-    @Column(name = "order_date")
+public class OrderDTO {
     private String orderDate;
 
-    @Column(name = "received")
     private boolean received;
 
-    @Column(name = "payed")
     private boolean payed;
 
-    @Column(name = "supplier_id")
     private int supplierId;
 
-    public Order(Integer orderId, String orderDate, boolean received, boolean payed,
-                 int supplierId) {
-        this.orderId = orderId;
+    public OrderDTO(String orderDate, boolean received, boolean payed, int supplierId) {
         this.orderDate = orderDate;
         this.received = received;
         this.payed = payed;
         this.supplierId = supplierId;
-    }
-
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Order() {
-
     }
 
     public String getOrderDate() {
@@ -73,5 +47,4 @@ public class Order {
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
     }
-
 }
