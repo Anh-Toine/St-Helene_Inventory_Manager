@@ -8,6 +8,7 @@ import java.util.Date;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer orderId;
 
     @Column(name = "order_date")
     private Date orderDate;
@@ -21,11 +22,20 @@ public class Order {
     @Column(name = "supplier_id")
     private int supplierId;
 
-    public Order(Date orderDate, boolean received, boolean payed, int supplierId) {
+    public Order(Integer orderId, Date orderDate, boolean received, boolean payed, int supplierId) {
+        this.orderId = orderId;
         this.orderDate = orderDate;
         this.received = received;
         this.payed = payed;
         this.supplierId = supplierId;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Order() {
