@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS product (
     product_name VARCHAR(255),
     quantity INT(100),
     quantity_sold INT(100)
-) engine=InnoDBs;
+) engine=InnoDB;
