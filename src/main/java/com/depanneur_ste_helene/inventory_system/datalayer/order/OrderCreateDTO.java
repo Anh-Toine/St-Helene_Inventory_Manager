@@ -1,8 +1,6 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.order;
 
-public class OrderDTO {
-
-    private String orderId;
+public class OrderCreateDTO {
 
     private String orderDate;
 
@@ -12,23 +10,14 @@ public class OrderDTO {
 
     private int supplierId;
 
-    public OrderDTO(String orderId, String orderDate, boolean received, boolean payed, int supplierId) {
-        this.orderId = orderId;
+    public OrderCreateDTO(String orderDate, boolean received, boolean payed, int supplierId) {
         this.orderDate = orderDate;
         this.received = received;
         this.payed = payed;
         this.supplierId = supplierId;
     }
 
-    public OrderDTO() {
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public OrderCreateDTO() {
     }
 
     public String getOrderDate() {

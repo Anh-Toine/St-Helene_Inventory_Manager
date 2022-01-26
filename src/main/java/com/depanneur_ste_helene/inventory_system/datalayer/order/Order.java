@@ -1,13 +1,18 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.order;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
+    private Integer id;
+
+    @Column(name = "order_id")
+    private UUID orderId = UUID.randomUUID();
 
     @Column(name = "order_date")
     private String orderDate;
@@ -21,8 +26,9 @@ public class Order {
     @Column(name = "supplier_id")
     private int supplierId;
 
-    public Order(Integer orderId, String orderDate, boolean received, boolean payed,
+    public Order(Integer id, UUID orderId, String orderDate, boolean received, boolean payed,
                  int supplierId) {
+        this.id = id;
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.received = received;
@@ -30,16 +36,24 @@ public class Order {
         this.supplierId = supplierId;
     }
 
-    public Integer getOrderId() {
+    public Order() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public UUID getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(UUID orderId) {
         this.orderId = orderId;
-    }
-
-    public Order() {
-
     }
 
     public String getOrderDate() {
