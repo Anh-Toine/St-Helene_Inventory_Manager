@@ -7,9 +7,9 @@ public class ProductDTO {
     private double price;
     private Integer quantity;
     private Integer quantitySold;
-    private Integer categoryId;
+    private String categoryId;
 
-    public ProductDTO(String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+    public ProductDTO(String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, String categoryId) {
         this.barCode = barCode;
         this.productName = productName;
         this.brand = brand;
@@ -70,9 +70,9 @@ public class ProductDTO {
         this.quantitySold = quantitySold;
     }
 
-    public Integer getCategoryId() { return categoryId; }
+    public String getCategoryId() { return categoryId; }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 }

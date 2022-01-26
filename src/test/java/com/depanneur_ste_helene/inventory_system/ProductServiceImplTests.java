@@ -34,8 +34,8 @@ public class ProductServiceImplTests {
     @Autowired
     ProductService productService;
 
-    ProductDTO productDTO = new ProductDTO("1", "Doritos", "Chips", 1, 2, 0, 1);
-    Product productEntity = new Product(1, "1", "Doritos", "Chips", 1, 2, 0, 1);
+    ProductDTO productDTO = new ProductDTO("1", "Doritos", "Chips", 1, 2, 0, "1");
+    Product productEntity = new Product(1, "1", "Doritos", "Chips", 1, 2, 0, "1");
 
     private final int PRICE_VALID = 1;
     private final int PRICE_INVALID = -1;
@@ -49,8 +49,8 @@ public class ProductServiceImplTests {
     @DisplayName("Create product valid")
     @Test
     public void test_CreateProduct_valid(){
-        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
-        Product entity = new Product(1,"1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1");
+        Product entity = new Product(1,"1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1");
         when(productRepository.save(any(Product.class))).thenReturn(entity);
 
         ProductDTO returnedProduct = productService.createProduct(model);
@@ -61,7 +61,7 @@ public class ProductServiceImplTests {
     @DisplayName("Create product not valid")
     @Test
     public void test_CreateProduct_not_valid(){
-        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,1);
+        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_INVALID, QUANTITY_INVALID,QUANTITY_SOLD_INVALID,"1");
         when(productRepository.save(any(Product.class))).thenThrow(InvalidInputException.class);
 
         assertThrows(InvalidInputException.class, ()->{
@@ -72,7 +72,7 @@ public class ProductServiceImplTests {
     @DisplayName("Create product already exists")
     @Test
     public void test_CreateProduct_already_exists(){
-        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1);
+        ProductDTO model = new ProductDTO("1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1");
 
         when(productRepository.existsByBarCode(model.getBarCode())).thenReturn(true);
 
@@ -87,9 +87,9 @@ public class ProductServiceImplTests {
 
         List<Product> products = new ArrayList<>();
 
-        products.add(new Product(1,"1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
-        products.add(new Product(2,"2", "product2", "brand2", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
-        products.add(new Product(3,"3", "product3", "brand3", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,1));
+        products.add(new Product(1,"1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1"));
+        products.add(new Product(2,"2", "product2", "brand2", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1"));
+        products.add(new Product(3,"3", "product3", "brand3", PRICE_VALID, QUANTITY_VALID,QUANTITY_SOLD_VALID,"1"));
 
         when(productRepository.findAll())
                 .thenReturn(products);
@@ -105,7 +105,7 @@ public class ProductServiceImplTests {
         // Arrange
 
         Product entity = new Product(1,"1", "product1", "brand1", PRICE_VALID, QUANTITY_VALID,
-                QUANTITY_SOLD_VALID,1);
+                QUANTITY_SOLD_VALID,"1");
 
         when(productRepository.findByBarCode(entity.getBarCode())).thenReturn(Optional.of(entity));
 

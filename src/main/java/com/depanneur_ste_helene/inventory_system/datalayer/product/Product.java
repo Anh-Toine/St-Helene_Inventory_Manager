@@ -27,9 +27,9 @@ public class Product {
     private Integer quantitySold;
     
     @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
 
-    public Product(Integer productId, String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, Integer categoryId) {
+    public Product(Integer productId, String barCode, String productName, String brand, double price, Integer quantity, Integer quantitySold, String categoryId) {
         this.productId = productId;
         this.barCode = barCode;
         this.productName = productName;
@@ -100,11 +100,11 @@ public class Product {
         this.quantitySold = quantitySold;
     }
 
-    public Integer getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 }
