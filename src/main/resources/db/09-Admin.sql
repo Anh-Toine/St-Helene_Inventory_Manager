@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS Admin;
-
-CREATE TABLE IF NOT EXISTS Admin (
-    user_id INT(4) AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE,
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255) UNIQUE
-) engine=InnoDB;

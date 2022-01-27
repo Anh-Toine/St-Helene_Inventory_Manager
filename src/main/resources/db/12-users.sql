@@ -1,0 +1,1 @@
+INSERT IGNORE INTO roles VALUES (1,1,'Admin',"Admin@gmail.com","Admin!");
