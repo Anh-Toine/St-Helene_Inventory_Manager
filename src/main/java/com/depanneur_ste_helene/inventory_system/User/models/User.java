@@ -1,10 +1,11 @@
 package com.depanneur_ste_helene.inventory_system.User.models;
 
-import com.depanneur_ste_helene.inventory_system.datalayer.Feature.Feature;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.hibernate.annotations.CreationTimestamp;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -22,7 +23,6 @@ public class User extends UserDTO {
     private Long id;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @UniqueElements(groups = Feature.class)
     private Long userId;
 
     @NotBlank
@@ -38,7 +38,7 @@ public class User extends UserDTO {
     @Size(max = 120)
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -53,12 +53,14 @@ public class User extends UserDTO {
         this.password = password;
     }
 
-    public Long getId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        Random rand = new Random();
+        long l = rand.nextInt(99999);
+        this.userId = l;
     }
 
     public Long getId() {

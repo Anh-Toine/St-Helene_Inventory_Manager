@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserMapper {
     @Mappings(
             {
-                    @Mapping(target = "id", ignore = true),
+                @Mapping(target = "id", ignore = true),
             }
     )
     User userDTOToUser(UserDTO userDTO);
