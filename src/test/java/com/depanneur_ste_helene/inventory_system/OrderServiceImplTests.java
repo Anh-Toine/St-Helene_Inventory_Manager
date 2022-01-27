@@ -2,6 +2,7 @@ package com.depanneur_ste_helene.inventory_system;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.order.OrderService;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.Order;
+import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -29,9 +32,9 @@ public class OrderServiceImplTests {
     @Autowired
     public OrderService service;
 
-    @DisplayName("Create a valid order")
+    @DisplayName("Get all orders")
     @Test
-    public void test_CreateOrderValid(){
+    public void test_GetAllOrders(){
         List<Order> orders = new ArrayList<>();
         orders.add(new Order(1, UUID.randomUUID(),"29-12-2021",true,true,2));
         orders.add(new Order(2, UUID.randomUUID(),"03-01-2022",true,true,1));
@@ -41,5 +44,18 @@ public class OrderServiceImplTests {
 
         List<OrderDTO> models = service.getAllOrders();
         assertEquals(models.size(),3);
+    }
+
+    @DisplayName("Create new order")
+    @Test
+    public void test_CreateNewOrder(){
+        OrderCreateDTO newOrder = new OrderCreateDTO("20-1-2021",false,false,3);
+        Order entity = new Order(1,UUID.randomUUID(),"20-1-2021",false,false,3);
+
+        when(repository.save(any(Order.class))).thenReturn(entity);
+
+        OrderDTO returnedModel = service.createOrder(newOrder);
+
+        assertThat(returnedModel.getOrderDate()).isEqualTo(newOrder.getOrderDate());
     }
 }

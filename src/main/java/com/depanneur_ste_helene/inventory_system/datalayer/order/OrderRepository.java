@@ -6,10 +6,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Transactional(readOnly = true)
-    List<Order> findOrderByOrderDate(String orderDate);
+    List<Order> findOrderByOrderId(UUID orderId);
 
 }

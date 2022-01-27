@@ -2,11 +2,12 @@ package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.order.OrderService;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.Order;
+import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +24,14 @@ public class OrderRESTController {
     @GetMapping("/orders")
     public List<OrderDTO> getAllOrders(){
         return SERVICE.getAllOrders();
+    }
+
+    @CrossOrigin
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/orders")
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderDTO createOrder(@RequestBody OrderCreateDTO newOrder){
+        return SERVICE.createOrder(newOrder);
     }
 }

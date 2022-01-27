@@ -1,6 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.businesslayer.order;
 
 import com.depanneur_ste_helene.inventory_system.datalayer.order.Order;
+import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,10 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public OrderDTO createOrder(OrderDTO order) {
-        return null;
+    public OrderDTO createOrder(OrderCreateDTO order) {
+        Order entity = orderMapper.createModelToEntity(order);
+        Order newOrder = orderRepository.save(entity);
+        return orderMapper.entityToModel(newOrder);
     }
 
     @Override
