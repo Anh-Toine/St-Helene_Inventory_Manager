@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT(4) AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(4),
+    username VARCHAR(255) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255) UNIQUE,
+) engine=InnoDB;
