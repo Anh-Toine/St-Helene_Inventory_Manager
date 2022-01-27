@@ -1,0 +1,1 @@
+INSERT IGNORE INTO Admin VALUES (1, "Admin", "123@email.com", "Admin");

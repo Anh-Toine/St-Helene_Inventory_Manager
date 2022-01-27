@@ -1,16 +1,9 @@
 package com.depanneur_ste_helene.inventory_system.User.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class UserDTO {
 
     private Long userId;
@@ -22,6 +15,7 @@ public class UserDTO {
     private String password;
 
     private Set<Role> roles = new HashSet<>();
+
 
     public Long getUserId() {
         return userId;
