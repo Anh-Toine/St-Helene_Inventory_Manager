@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface CategoryRepository extends JpaRepository <Category, Integer>{
 
     @Transactional(readOnly = true)
-    Optional<Category> findByCategoryId(UUID categoryId);
+    Optional<Category> findByCategoryId(String categoryId);
 
     @Transactional(readOnly = true)
     Optional<Category> findByCategoryName(String categoryName);

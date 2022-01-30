@@ -40,9 +40,9 @@ public class CategoryServiceImplTests {
     public void test_GetAllCategory(){
         List<Category> categories = new ArrayList<>();
 
-        categories.add(new Category(1, UUID.randomUUID(),"1",false,0.00));
-        categories.add(new Category(2,UUID.randomUUID(),"2",true,0.15));
-        categories.add(new Category(3,UUID.randomUUID(),"3",false,0.00));
+        categories.add(new Category(1, UUID.randomUUID().toString(),"1",false,0.00));
+        categories.add(new Category(2,UUID.randomUUID().toString(),"2",true,0.15));
+        categories.add(new Category(3,UUID.randomUUID().toString(),"3",false,0.00));
 
         when(categoryRepository.findAll()).thenReturn(categories);
 
@@ -55,7 +55,7 @@ public class CategoryServiceImplTests {
     @Test
     public void test_CreateCategory(){
         CategoryCreateDTO newCategory = new CategoryCreateDTO("1",false,0.00);
-        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
+        Category entity = new Category(1,UUID.randomUUID().toString(),"1",false,0.00);
 
         when(categoryRepository.save(any(Category.class))).thenReturn(entity);
 
@@ -81,12 +81,12 @@ public class CategoryServiceImplTests {
     public void test_UpdateCategory(){
         UUID categoryUUID = UUID.randomUUID();
 
-        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
+        Category entity = new Category(1,UUID.randomUUID().toString(),"1",false,0.00);
 
-        Category updateEntity = new Category(1,categoryUUID,"1",true,0.15);
+        Category updateEntity = new Category(1,categoryUUID.toString(),"1",true,0.15);
         CategoryDTO updateModel = new CategoryDTO(categoryUUID.toString(),"1",true,0.15);
 
-        when(categoryRepository.findByCategoryId(any(UUID.class))).thenReturn(Optional.of(entity));
+        when(categoryRepository.findByCategoryId(any(String.class))).thenReturn(Optional.of(entity));
         when(categoryRepository.save(any(Category.class))).thenReturn(updateEntity);
 
         CategoryDTO returnedUpdateModel = categoryService.updateCategory(updateModel);
@@ -99,9 +99,9 @@ public class CategoryServiceImplTests {
     @DisplayName("Delete category")
     @Test
     public void test_DeleteCategory(){
-        Category entity = new Category(1,UUID.randomUUID(),"1",false,0.00);
+        Category entity = new Category(1,UUID.randomUUID().toString(),"1",false,0.00);
 
-        when(categoryRepository.findByCategoryId(any(UUID.class))).thenReturn(Optional.of(entity));
+        when(categoryRepository.findByCategoryId(any(String.class))).thenReturn(Optional.of(entity));
 
         categoryService.deleteCategory(entity.getCategoryId().toString());
 

@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     public CategoryDTO updateCategory(CategoryDTO model){
         Category categoryEntity = mapper.modelToEntity(model);
-        Optional<Category> returnedEntity = categoryRepository.findByCategoryId(UUID.fromString(model.getCategoryId()));
+        Optional<Category> returnedEntity = categoryRepository.findByCategoryId(model.getCategoryId());
 
         categoryEntity.setId(returnedEntity.get().getId());
 
@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     public void deleteCategory(String categoryId) {
-        categoryRepository.findByCategoryId(UUID.fromString(categoryId)).ifPresent(p -> categoryRepository.delete(p));
+        categoryRepository.findByCategoryId(categoryId).ifPresent(p -> categoryRepository.delete(p));
     }
 
 
