@@ -10,7 +10,7 @@ public class Category {
     private Integer id;
 
     @Column(name = "category_id")
-    private UUID categoryId = UUID.randomUUID();
+    private String categoryId = UUID.randomUUID().toString();
 
     @Column(name = "category_name")
     private String categoryName;
@@ -21,7 +21,7 @@ public class Category {
     @Column(name = "tax")
     private double tax;
 
-    public Category(Integer id, UUID categoryId, String categoryName, boolean taxable, double tax) {
+    public Category(Integer id, String categoryId, String categoryName, boolean taxable, double tax) {
         this.id = id;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -40,11 +40,11 @@ public class Category {
         this.id = id;
     }
 
-    public UUID getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(UUID categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

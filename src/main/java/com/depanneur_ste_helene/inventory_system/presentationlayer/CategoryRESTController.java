@@ -44,4 +44,5 @@ public class CategoryRESTController {
     @CrossOrigin
     @DeleteMapping(path = "/categories/{categoryId}")
     public void deleteCategory(@PathVariable String categoryId){SERVICE.deleteCategory(categoryId);}
+
 }

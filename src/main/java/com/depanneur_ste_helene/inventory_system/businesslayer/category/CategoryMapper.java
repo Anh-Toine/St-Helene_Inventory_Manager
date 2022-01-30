@@ -19,16 +19,10 @@ public interface CategoryMapper {
     })
     Category createDTOToEntity(CategoryCreateDTO model);
 
-    @Mapping(target = "categoryId", expression = "java(entity.getCategoryId().toString())")
     CategoryDTO entityToModel(Category entity);
-
 
     List<CategoryDTO> entityListToModelList(List<Category> categories);
 
-
-    @Mappings({
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "categoryId", expression = "java(UUID.fromString(model.getCategoryId()))")
-    })
+    @Mapping(target = "id", ignore = true)
     Category modelToEntity(CategoryDTO model);
 }
