@@ -1,8 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
-import com.depanneur_ste_helene.inventory_system.businesslayer.SupplierService;
-import com.depanneur_ste_helene.inventory_system.datalayer.Supplier;
-import com.depanneur_ste_helene.inventory_system.datalayer.SupplierDTO;
+import com.depanneur_ste_helene.inventory_system.businesslayer.supplier.SupplierService;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

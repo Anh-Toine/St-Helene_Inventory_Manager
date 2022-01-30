@@ -1,13 +1,12 @@
-package com.depanneur_ste_helene.inventory_system.businesslayer;
+package com.depanneur_ste_helene.inventory_system.businesslayer.supplier;
 
-import com.depanneur_ste_helene.inventory_system.datalayer.Supplier;
-import com.depanneur_ste_helene.inventory_system.datalayer.SupplierDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.SupplierRepository;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.Supplier;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 import org.springframework.stereotype.Service;
 
-import java.rmi.AlreadyBoundException;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,9 +1,8 @@
-package com.depanneur_ste_helene.inventory_system.businesslayer;
-import com.depanneur_ste_helene.inventory_system.datalayer.Product;
-import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
+package com.depanneur_ste_helene.inventory_system.businesslayer.product;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 

@@ -2,10 +2,10 @@
 
 package com.depanneur_ste_helene.inventory_system;
 
-import com.depanneur_ste_helene.inventory_system.businesslayer.ProductService;
-import com.depanneur_ste_helene.inventory_system.datalayer.Product;
-import com.depanneur_ste_helene.inventory_system.datalayer.ProductDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.ProductRepository;
+import com.depanneur_ste_helene.inventory_system.businesslayer.product.ProductService;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.Product;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
 import org.junit.jupiter.api.DisplayName;

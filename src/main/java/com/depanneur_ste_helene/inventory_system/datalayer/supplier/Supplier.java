@@ -1,19 +1,43 @@
-package com.depanneur_ste_helene.inventory_system.datalayer;
+package com.depanneur_ste_helene.inventory_system.datalayer.supplier;
 
-public class SupplierDTO {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "supplier")
+public class Supplier {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer supplierId;
+
+    @Column(name = "supplier_name")
     private String supplierName;
+
+    @Column(name = "representative_name")
     private String representativeName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    public SupplierDTO(String supplierName, String representativeName, String email, String phoneNumber) {
+    public Supplier(Integer id, String supplierName, String representativeName, String email, String phoneNumber) {
+        supplierId = id;
         this.supplierName = supplierName;
         this.representativeName = representativeName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public SupplierDTO() {
+    public Supplier() {
+    }
+
+    public Integer getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Integer id) {
+        supplierId = id;
     }
 
     public String getSupplierName() {

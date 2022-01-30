@@ -1,8 +1,8 @@
 package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
-import com.depanneur_ste_helene.inventory_system.businesslayer.CategoryService;
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryCreateDTO;
-import com.depanneur_ste_helene.inventory_system.datalayer.CategoryDTO;
+import com.depanneur_ste_helene.inventory_system.businesslayer.category.CategoryService;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryCreateDTO;
+import com.depanneur_ste_helene.inventory_system.datalayer.category.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
