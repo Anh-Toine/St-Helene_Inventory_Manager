@@ -29,4 +29,6 @@ public interface OrderMapper {
             @Mapping(target = "orderId", expression = "java(UUID.fromString(model.getOrderId()))")
     })
     Order modelToEntity(OrderDTO model);
+
+
 }
