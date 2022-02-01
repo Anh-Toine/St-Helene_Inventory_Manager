@@ -1,0 +1,1 @@
+INSERT IGNORE INTO users VALUES (1,1,'Admin',"Admin@gmail.com","Admin!");
