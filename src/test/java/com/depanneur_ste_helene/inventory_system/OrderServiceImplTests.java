@@ -71,7 +71,7 @@ public class OrderServiceImplTests {
 
         OrderDTO updatedModel = new OrderDTO(newUUID.toString(),"20-01-2022",true,true,2);
 
-        when(repository.findOrderByOrderId(any(String.class))).thenReturn(Optional.of(entity));
+        when(repository.findByOrderId(any(String.class))).thenReturn(Optional.of(entity));
         when(repository.save(any(Order.class))).thenReturn(updatedEntity);
 
         OrderDTO returned = service.updateOrder(updatedModel);

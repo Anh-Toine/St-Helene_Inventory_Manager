@@ -12,6 +12,5 @@ import java.util.UUID;
 @Repository
 public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Transactional(readOnly = true)
-    Optional<Order> findOrderByOrderId(String orderId);
-
+    Optional<Order> findByOrderId(String orderId);
 }
