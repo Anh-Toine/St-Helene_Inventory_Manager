@@ -12,7 +12,7 @@ public class Order {
     private Integer id;
 
     @Column(name = "order_id")
-    private UUID orderId = UUID.randomUUID();
+    private String orderId = UUID.randomUUID().toString();
 
     @Column(name = "order_date")
     private String orderDate;
@@ -26,7 +26,7 @@ public class Order {
     @Column(name = "supplier_id")
     private int supplierId;
 
-    public Order(Integer id, UUID orderId, String orderDate, boolean received, boolean payed,
+    public Order(Integer id, String orderId, String orderDate, boolean received, boolean payed,
                  int supplierId) {
         this.id = id;
         this.orderId = orderId;
@@ -48,11 +48,11 @@ public class Order {
         this.id = id;
     }
 
-    public UUID getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

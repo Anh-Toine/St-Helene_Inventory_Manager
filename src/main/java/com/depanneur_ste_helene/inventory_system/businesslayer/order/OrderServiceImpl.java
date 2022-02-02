@@ -7,6 +7,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.order.OrderRepository
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -36,6 +37,15 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderDTO updateOrder(OrderDTO order) {
-        return null;
+        Order entity = orderMapper.modelToEntity(order);
+        Optional<Order> returnedEntity =
+                orderRepository.findOrderByOrderId(order.getOrderId());
+
+        if(returnedEntity.isPresent()){
+            entity.setId(returnedEntity.get().getId());
+        }
+
+        Order updatedOrder = orderRepository.save(entity);
+        return orderMapper.entityToModel(updatedOrder);
     }
 }
