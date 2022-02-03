@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService{
     public OrderDTO updateOrder(OrderDTO order) {
         Order entity = orderMapper.modelToEntity(order);
         Optional<Order> returnedEntity =
-                orderRepository.findOrderByOrderId(order.getOrderId());
+                orderRepository.findByOrderId(order.getOrderId());
 
         if(returnedEntity.isPresent()){
             entity.setId(returnedEntity.get().getId());

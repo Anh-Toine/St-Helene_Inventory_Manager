@@ -34,4 +34,15 @@ public class OrderRESTController {
     public OrderDTO createOrder(@RequestBody OrderCreateDTO newOrder){
         return SERVICE.createOrder(newOrder);
     }
+
+    @CrossOrigin
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/orders/{orderId}")
+    public OrderDTO updateOrder(@RequestBody OrderDTO orderDTO,
+                                @PathVariable("orderId") String orderId){
+        orderDTO.setOrderId(orderId);
+        return SERVICE.updateOrder(orderDTO);
+    }
+
 }
