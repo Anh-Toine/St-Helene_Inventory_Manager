@@ -27,7 +27,8 @@ public class ReportServiceImpl implements ReportService{
             }
         }
 
-        ValueReport valueReport = new ValueReport(java.time.LocalDate.now(), inventoryValue);
+        ValueReport valueReport = new ValueReport(java.time.LocalDate.now(),
+                Math.round(inventoryValue * 100.0) / 100.0);
 
         return valueReport;
     }
