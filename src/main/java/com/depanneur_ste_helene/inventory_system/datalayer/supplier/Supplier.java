@@ -1,13 +1,17 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.supplier;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "supplier")
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer supplierId;
+    private Integer id;
+
+    @Column(name = "supplier_id")
+    private String supplierId = UUID.randomUUID().toString();
 
     @Column(name = "supplier_name")
     private String supplierName;
@@ -21,8 +25,18 @@ public class Supplier {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public Supplier(Integer id, String supplierName, String representativeName, String email, String phoneNumber) {
-        supplierId = id;
+    public Supplier(Integer id, String supplierName, String representativeName, String email,
+                    String phoneNumber) {
+        this.id = id;
+        this.supplierName = supplierName;
+        this.representativeName = representativeName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Supplier(Integer id, String supplierId, String supplierName, String representativeName, String email, String phoneNumber) {
+        this.id = id;
+        this.supplierId = supplierId;
         this.supplierName = supplierName;
         this.representativeName = representativeName;
         this.email = email;
@@ -32,12 +46,12 @@ public class Supplier {
     public Supplier() {
     }
 
-    public Integer getSupplierId() {
-        return supplierId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSupplierId(Integer id) {
-        supplierId = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getSupplierName() {
@@ -70,5 +84,13 @@ public class Supplier {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
     }
 }

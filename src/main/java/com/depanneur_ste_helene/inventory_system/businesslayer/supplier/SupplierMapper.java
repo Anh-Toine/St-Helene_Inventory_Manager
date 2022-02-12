@@ -6,13 +6,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
+import java.util.UUID;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", imports = {UUID.class})
 public interface SupplierMapper {
 
     SupplierDTO entityToModel(Supplier entity);
     List<SupplierDTO> entityListToModelList(List<Supplier> entities);
 
     @Mapping(target = "supplierId", ignore = true)
-    Supplier modelToEntity(SupplierDTO model);
+    Supplier modelToEntity(SupplierDTO modelass);
 }

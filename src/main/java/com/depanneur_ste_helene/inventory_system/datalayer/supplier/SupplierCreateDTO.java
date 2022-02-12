@@ -1,36 +1,19 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.supplier;
 
-public class SupplierDTO {
-    private String supplierId;
+public class SupplierCreateDTO {
     private String supplierName;
     private String representativeName;
     private String email;
     private String phoneNumber;
 
-    public SupplierDTO(String supplierName, String representativeName, String email, String phoneNumber) {
+    public SupplierCreateDTO(String supplierName, String representativeName, String email, String phoneNumber) {
         this.supplierName = supplierName;
         this.representativeName = representativeName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public SupplierDTO(String supplierId, String supplierName, String representativeName, String email, String phoneNumber) {
-        this.supplierId = supplierId;
-        this.supplierName = supplierName;
-        this.representativeName = representativeName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public SupplierDTO() {
-    }
-
-    public String getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public SupplierCreateDTO() {
     }
 
     public String getSupplierName() {
