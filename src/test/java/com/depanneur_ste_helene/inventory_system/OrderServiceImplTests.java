@@ -59,17 +59,15 @@ public class OrderServiceImplTests {
 
         assertThat(returnedModel.getOrderDate()).isEqualTo(newOrder.getOrderDate());
     }
+
     @DisplayName("Update order")
     @Test
     public void test_UpdateOrder(){
 
-        UUID oldUUID = UUID.randomUUID();
-        UUID newUUID = UUID.randomUUID();
+        Order entity = new Order(1,UUID.randomUUID().toString(),"19-01-2022",true,true,2);
+        Order updatedEntity = new Order(1,UUID.randomUUID().toString(),"20-01-2022",true,true,2);
 
-        Order entity = new Order(1,oldUUID.toString(),"19-01-2022",true,true,2);
-        Order updatedEntity = new Order(1,newUUID.toString(),"20-01-2022",true,true,2);
-
-        OrderDTO updatedModel = new OrderDTO(newUUID.toString(),"20-01-2022",true,true,2);
+        OrderDTO updatedModel = new OrderDTO(UUID.randomUUID().toString(),"20-01-2022",true,true,2);
 
         when(repository.findByOrderId(any(String.class))).thenReturn(Optional.of(entity));
         when(repository.save(any(Order.class))).thenReturn(updatedEntity);

@@ -25,15 +25,6 @@ public class Supplier {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public Supplier(Integer id, String supplierName, String representativeName, String email,
-                    String phoneNumber) {
-        this.id = id;
-        this.supplierName = supplierName;
-        this.representativeName = representativeName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
-
     public Supplier(Integer id, String supplierId, String supplierName, String representativeName, String email, String phoneNumber) {
         this.id = id;
         this.supplierId = supplierId;
