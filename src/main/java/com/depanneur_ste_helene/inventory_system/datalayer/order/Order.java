@@ -24,10 +24,10 @@ public class Order {
     private boolean payed;
 
     @Column(name = "supplier_id")
-    private int supplierId;
+    private String supplierId;
 
     public Order(Integer id, String orderId, String orderDate, boolean received, boolean payed,
-                 int supplierId) {
+                 String supplierId) {
         this.id = id;
         this.orderId = orderId;
         this.orderDate = orderDate;
@@ -80,11 +80,11 @@ public class Order {
         this.payed = payed;
     }
 
-    public int getSupplierId() {
+    public String getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(int supplierId) {
+    public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
 

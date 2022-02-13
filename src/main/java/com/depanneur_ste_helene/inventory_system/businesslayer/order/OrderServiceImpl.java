@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public OrderDTO createOrder(OrderCreateDTO order) {
-        Order entity = orderMapper.createModelToEntity(order);
+        Order entity = orderMapper.createDTOToEntity(order);
         Order newOrder = orderRepository.save(entity);
         return orderMapper.entityToModel(newOrder);
     }

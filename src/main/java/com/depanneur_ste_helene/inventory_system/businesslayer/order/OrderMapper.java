@@ -13,21 +13,17 @@ import java.util.UUID;
 @Mapper(componentModel = "spring", imports = {UUID.class})
 public interface OrderMapper {
 
-    @Mapping(target = "orderId", expression = "java(entity.getOrderId().toString())")
     OrderDTO entityToModel(Order entity);
 
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "orderId",ignore = true)
     })
-    Order createModelToEntity(OrderCreateDTO model);
+    Order createDTOToEntity(OrderCreateDTO model);
 
     List<OrderDTO> entityListToModelList(List<Order> orders);
 
-    @Mappings({
-            @Mapping(target = "id", ignore = true),
-            @Mapping(target = "orderId", ignore = true)
-    })
+    @Mapping(target = "id", ignore = true)
     Order modelToEntity(OrderDTO model);
 
 
