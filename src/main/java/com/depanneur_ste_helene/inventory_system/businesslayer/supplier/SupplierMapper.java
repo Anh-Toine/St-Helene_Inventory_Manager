@@ -22,6 +22,6 @@ public interface SupplierMapper {
     SupplierDTO entityToModel(Supplier entity);
     List<SupplierDTO> entityListToModelList(List<Supplier> entities);
 
-    @Mapping(target = "supplierId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Supplier modelToEntity(SupplierDTO modelass);
 }

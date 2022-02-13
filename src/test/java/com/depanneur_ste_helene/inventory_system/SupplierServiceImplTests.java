@@ -2,6 +2,7 @@ package com.depanneur_ste_helene.inventory_system;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.supplier.SupplierService;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.Supplier;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.InvalidInputException;
@@ -62,7 +63,9 @@ public class SupplierServiceImplTests {
     @Test
     public void test_CreateSupplier_valid(){
         // Arrange
-        SupplierDTO dto = new SupplierDTO("FooSuppliers","Nelson Doe","nelson111@gmail.com","111" +
+        SupplierCreateDTO dto = new SupplierCreateDTO("FooSuppliers","Nelson Doe","nelson111" +
+                "@gmail.com",
+                "111" +
                 "-1111-1111");
         Supplier entity = new Supplier(1,"FooSupplier","Nelson Doe","nelson111@gmail.com","111" +
                 "-1111-1111");
@@ -82,7 +85,7 @@ public class SupplierServiceImplTests {
     @Test
     public void test_CreateSupplier_blank(){
         // Arrange
-        SupplierDTO dto = new SupplierDTO("FooSuppliers","Nelson Doe"," ","111" +
+        SupplierCreateDTO dto = new SupplierCreateDTO("FooSuppliers","Nelson Doe"," ","111" +
                 "-1111-1111");
 
         // Act
@@ -101,7 +104,7 @@ public class SupplierServiceImplTests {
         Supplier entity = new Supplier(1,"Foo","FooRep","foo@email.com","111-111-1111");
         SupplierDTO model = new SupplierDTO("Foo","FooRep","foo@email.com","111-111-1111");
         // Act
-        when(supplierRespository.findBySupplierName(any())).thenReturn(Optional.ofNullable(entity));
+        when(supplierRespository.findBySupplierId(any())).thenReturn(Optional.ofNullable(entity));
         when(supplierRespository.save(any(Supplier.class))).thenReturn(entity);
         SupplierDTO capturedSupplier = supplierService.updateSupplier(model);
         // Assert
