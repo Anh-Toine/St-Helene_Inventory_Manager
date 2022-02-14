@@ -1,48 +1,19 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.supplier;
 
-import javax.persistence.*;
-import java.util.UUID;
-
-@Entity
-@Table(name = "supplier")
-public class Supplier {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "supplier_id")
-    private String supplierId = UUID.randomUUID().toString();
-
-    @Column(name = "supplier_name")
+public class SupplierCreateDTO {
     private String supplierName;
-
-    @Column(name = "representative_name")
     private String representativeName;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "phone_number")
     private String phoneNumber;
 
-    public Supplier(Integer id, String supplierId, String supplierName, String representativeName, String email, String phoneNumber) {
-        this.id = id;
-        this.supplierId = supplierId;
+    public SupplierCreateDTO(String supplierName, String representativeName, String email, String phoneNumber) {
         this.supplierName = supplierName;
         this.representativeName = representativeName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public Supplier() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public SupplierCreateDTO() {
     }
 
     public String getSupplierName() {
@@ -75,13 +46,5 @@ public class Supplier {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
     }
 }

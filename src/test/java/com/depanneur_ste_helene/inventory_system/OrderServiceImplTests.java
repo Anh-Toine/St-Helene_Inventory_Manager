@@ -37,9 +37,9 @@ public class OrderServiceImplTests {
     @Test
     public void test_GetAllOrders(){
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order(1, UUID.randomUUID().toString(),"29-12-2021",true,true,2));
-        orders.add(new Order(2, UUID.randomUUID().toString(),"03-01-2022",true,true,1));
-        orders.add(new Order(3, UUID.randomUUID().toString(),"19-01-2022",true,true,1));
+        orders.add(new Order(1, UUID.randomUUID().toString(),"29-12-2021",true,true,UUID.randomUUID().toString()));
+        orders.add(new Order(2, UUID.randomUUID().toString(),"03-01-2022",true,true,UUID.randomUUID().toString()));
+        orders.add(new Order(3, UUID.randomUUID().toString(),"19-01-2022",true,true,UUID.randomUUID().toString()));
 
         when(repository.findAll()).thenReturn(orders);
 
@@ -50,8 +50,8 @@ public class OrderServiceImplTests {
     @DisplayName("Create new order")
     @Test
     public void test_CreateNewOrder(){
-        OrderCreateDTO newOrder = new OrderCreateDTO("20-1-2021",false,false,3);
-        Order entity = new Order(1,UUID.randomUUID().toString(),"20-1-2021",false,false,3);
+        OrderCreateDTO newOrder = new OrderCreateDTO("20-1-2021",false,false,UUID.randomUUID().toString());
+        Order entity = new Order(1,UUID.randomUUID().toString(),"20-1-2021",false,false,UUID.randomUUID().toString());
 
         when(repository.save(any(Order.class))).thenReturn(entity);
 
@@ -59,17 +59,19 @@ public class OrderServiceImplTests {
 
         assertThat(returnedModel.getOrderDate()).isEqualTo(newOrder.getOrderDate());
     }
+
     @DisplayName("Update order")
     @Test
     public void test_UpdateOrder(){
 
-        UUID oldUUID = UUID.randomUUID();
-        UUID newUUID = UUID.randomUUID();
+        String oldUUID = UUID.randomUUID().toString();
+        String newUUID = UUID.randomUUID().toString();
 
-        Order entity = new Order(1,oldUUID.toString(),"19-01-2022",true,true,2);
-        Order updatedEntity = new Order(1,newUUID.toString(),"20-01-2022",true,true,2);
+        Order entity = new Order(1,UUID.randomUUID().toString(),"19-01-2022",true,true,oldUUID);
+        Order updatedEntity = new Order(1,UUID.randomUUID().toString(),"20-01-2022",true,true,newUUID);
 
-        OrderDTO updatedModel = new OrderDTO(newUUID.toString(),"20-01-2022",true,true,2);
+        OrderDTO updatedModel = new OrderDTO(UUID.randomUUID().toString(),"20-01-2022",true,true,
+                newUUID);
 
         when(repository.findByOrderId(any(String.class))).thenReturn(Optional.of(entity));
         when(repository.save(any(Order.class))).thenReturn(updatedEntity);
@@ -79,6 +81,5 @@ public class OrderServiceImplTests {
         assertThat(returned.getOrderDate()).isEqualTo(updatedModel.getOrderDate());
         assertThat(returned.isPayed()).isEqualTo(updatedModel.isPayed());
         assertThat(returned.isReceived()).isEqualTo(updatedModel.isReceived());
-        assertThat(returned.getSupplierId()).isEqualTo(updatedModel.getSupplierId());
     }
 }

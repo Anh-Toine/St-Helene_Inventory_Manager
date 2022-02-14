@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS orders(
     order_date VARCHAR(255),
     received BOOL,
     payed BOOL,
-    supplier_id INT
+    supplier_id VARCHAR(255)
 )engine=InnoDB;

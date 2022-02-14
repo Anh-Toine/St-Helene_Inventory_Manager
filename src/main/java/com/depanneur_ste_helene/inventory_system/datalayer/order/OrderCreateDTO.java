@@ -8,9 +8,9 @@ public class OrderCreateDTO {
 
     private boolean payed;
 
-    private int supplierId;
+    private String supplierId;
 
-    public OrderCreateDTO(String orderDate, boolean received, boolean payed, int supplierId) {
+    public OrderCreateDTO(String orderDate, boolean received, boolean payed, String supplierId) {
         this.orderDate = orderDate;
         this.received = received;
         this.payed = payed;
@@ -44,11 +44,11 @@ public class OrderCreateDTO {
         this.payed = payed;
     }
 
-    public int getSupplierId() {
+    public String getSupplierId() {
         return supplierId;
     }
 
-    public void setSupplierId(int supplierId) {
+    public void setSupplierId(String supplierId) {
         this.supplierId = supplierId;
     }
 }

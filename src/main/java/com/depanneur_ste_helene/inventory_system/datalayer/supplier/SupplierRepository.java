@@ -13,8 +13,12 @@ public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
     Optional<Supplier> findBySupplierName(String name);
 
     @Transactional(readOnly = true)
-    List<Supplier> findBySupplierId(Integer supplierId);
+    Optional<Supplier> findBySupplierId(String supplierId);
 
     @Transactional(readOnly = true)
     boolean existsBySupplierName(String supplierName);
+
+
+    @Transactional(readOnly = true)
+    boolean existsBySupplierId(String supplierId);
 }

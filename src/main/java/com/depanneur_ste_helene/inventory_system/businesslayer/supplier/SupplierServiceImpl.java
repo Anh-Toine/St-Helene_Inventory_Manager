@@ -1,6 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.businesslayer.supplier;
 
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.Supplier;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierRepository;
 import com.depanneur_ste_helene.inventory_system.exceptions.AlreadyExistsException;
@@ -28,7 +29,7 @@ public class SupplierServiceImpl implements SupplierService{
     }
 
     @Override
-    public SupplierDTO createSupplier(SupplierDTO model) {
+    public SupplierDTO createSupplier(SupplierCreateDTO model) {
         if(model.getSupplierName().isBlank() ||
                 model.getRepresentativeName().isBlank() ||
                 model.getEmail().isBlank() ||
@@ -40,7 +41,7 @@ public class SupplierServiceImpl implements SupplierService{
             throw new AlreadyExistsException("Input not valid: supplier already exists!");
         }
 
-        Supplier supplierEntity = supplierMapper.modelToEntity(model);
+        Supplier supplierEntity = supplierMapper.createDTOToEntity(model);
         Supplier newEntity = supplierRespository.save(supplierEntity);
 
         return supplierMapper.entityToModel(newEntity);
@@ -50,9 +51,9 @@ public class SupplierServiceImpl implements SupplierService{
     public SupplierDTO updateSupplier(SupplierDTO model) {
         Supplier supplierEntity = supplierMapper.modelToEntity(model);
         Optional<Supplier> returnedEntity =
-                supplierRespository.findBySupplierName(model.getSupplierName());
+                supplierRespository.findBySupplierId(model.getSupplierId());
 
-        supplierEntity.setSupplierId(returnedEntity.get().getSupplierId());
+        supplierEntity.setId(returnedEntity.get().getId());
 
         Supplier updatedSupplier = supplierRespository.save(supplierEntity);
 

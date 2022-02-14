@@ -1,6 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.datalayer.supplier;
 
 public class SupplierDTO {
+    private String supplierId;
     private String supplierName;
     private String representativeName;
     private String email;
@@ -13,7 +14,23 @@ public class SupplierDTO {
         this.phoneNumber = phoneNumber;
     }
 
+    public SupplierDTO(String supplierId, String supplierName, String representativeName, String email, String phoneNumber) {
+        this.supplierId = supplierId;
+        this.supplierName = supplierName;
+        this.representativeName = representativeName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public SupplierDTO() {
+    }
+
+    public String getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(String supplierId) {
+        this.supplierId = supplierId;
     }
 
     public String getSupplierName() {

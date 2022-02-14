@@ -1,6 +1,7 @@
 package com.depanneur_ste_helene.inventory_system.presentationlayer;
 
 import com.depanneur_ste_helene.inventory_system.businesslayer.supplier.SupplierService;
+import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierCreateDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.supplier.SupplierDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,22 +28,23 @@ public class SupplierRESTController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE,
                 path = "/suppliers")
-    public SupplierDTO createSupplier(@RequestBody SupplierDTO supplier){
+    public SupplierDTO createSupplier(@RequestBody SupplierCreateDTO supplier){
         return SERVICE.createSupplier(supplier);
     }
 
     @CrossOrigin
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
-            path = "/suppliers/{supplierName}")
-    public SupplierDTO updateSupplier(@RequestBody SupplierDTO supplierDTO, @PathVariable("supplierName") String supplierName){
-        supplierDTO.setSupplierName(supplierName);
+            path = "/suppliers/{supplierId}")
+    public SupplierDTO updateSupplier(@RequestBody SupplierDTO supplierDTO, @PathVariable(
+            "supplierId") String supplierId){
+        supplierDTO.setSupplierId(supplierId);
         return SERVICE.updateSupplier(supplierDTO);
     }
 
     @CrossOrigin
-    @DeleteMapping("/suppliers/{supplierName}")
-    public void deleteSupplier(@PathVariable("supplierName") String supplierName){
-        SERVICE.deleteSupplier(supplierName);
+    @DeleteMapping("/suppliers/{supplierId}")
+    public void deleteSupplier(@PathVariable("supplierId") String supplierId){
+        SERVICE.deleteSupplier(supplierId);
     }
 }
