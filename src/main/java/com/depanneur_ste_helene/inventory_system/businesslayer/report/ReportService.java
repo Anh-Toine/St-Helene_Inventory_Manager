@@ -8,4 +8,5 @@ public interface ReportService {
     ValueReport getInventoryValue();
     BestSellingReport getBestSelling();
     WorstSellingReport getWorstSelling();
+    void endOfMonthQtySoldReset();
 }

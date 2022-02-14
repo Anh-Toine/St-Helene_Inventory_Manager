@@ -234,4 +234,23 @@ public class ReportServiceImplTests {
         assertEquals(java.time.LocalDate.now(), worstSellingReport.getDate());
         assertNotEquals(3, worstSellingReport.getProductDTOS().size());
     }
+
+    @DisplayName("Reset quantity sold")
+    @Test
+    public void test_resetQuantitySold(){
+        List<Product> entityProducts = new ArrayList<>();
+
+        entityProducts.add(new Product(1,"1", "product1", "brand1", 10, 100,150,"1"));
+        entityProducts.add(new Product(2,"2", "product2", "brand2", 15, 200,100,"1"));
+        entityProducts.add(new Product(3,"3", "product3", "brand3", 20, 300, 200,"1"));
+
+        when(productRepository.findAll())
+                .thenReturn(entityProducts);
+
+        reportService.endOfMonthQtySoldReset();
+
+        assertEquals(0,entityProducts.get(0).getQuantitySold());
+        assertEquals(0,entityProducts.get(1).getQuantitySold());
+        assertEquals(0,entityProducts.get(2).getQuantitySold());
+    }
 }

@@ -7,6 +7,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductReposi
 import com.depanneur_ste_helene.inventory_system.datalayer.report.BestSellingReport;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.ValueReport;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.WorstSellingReport;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -85,5 +86,18 @@ public class ReportServiceImpl implements ReportService{
         );
 
         return worstSellingReport;
+    }
+
+    @Scheduled(cron = "0 0 0 L * *")
+    public void endOfMonthQtySoldReset() {
+
+        List<Product> productList = productRepository.findAll();
+
+        for(int i = 0; i < productList.size(); i++){
+            if(productList.get(i).getQuantitySold() != 0){
+                productList.get(i).setQuantitySold(0);
+                productRepository.save(productList.get(i));
+            }
+        }
     }
 }
