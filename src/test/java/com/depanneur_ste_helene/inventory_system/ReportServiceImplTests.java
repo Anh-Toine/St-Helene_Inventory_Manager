@@ -5,6 +5,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.product.Product;
 import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.BestSellingReport;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.ValueReport;
+import com.depanneur_ste_helene.inventory_system.datalayer.report.WorstSellingReport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +17,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -135,7 +135,7 @@ public class ReportServiceImplTests {
         assertNotEquals("3", bestSellingReport.getProductDTOS().get(2).getBarCode());
     }
 
-    @DisplayName("Get best selling 50 product")
+    @DisplayName("Get best selling 50 product valid")
     @Test
     public void test_GetBestSelling_50Product_valid(){
 
@@ -191,5 +191,47 @@ public class ReportServiceImplTests {
         assertEquals(java.time.LocalDate.now(), bestSellingReport.getDate());
         assertNotEquals("code0", bestSellingReport.getProductDTOS().get(0).getBarCode());
         assertNotEquals("code49", bestSellingReport.getProductDTOS().get(49).getBarCode());
+    }
+
+    @DisplayName("Get worst selling product valid")
+    @Test
+    public void test_GetWorstSelling_Product_valid(){
+
+        List<Product> entityProducts = new ArrayList<>();
+
+        entityProducts.add(new Product(1,"1", "product1", "brand1", 10, 100,150,"1"));
+        entityProducts.add(new Product(2,"2", "product2", "brand2", 15, 200,0,"1"));
+        entityProducts.add(new Product(3,"3", "product3", "brand3", 20, 300, 200,"1"));
+        entityProducts.add(new Product(4,"4", "product4", "brand4", 20, 300, 0,"1"));
+        entityProducts.add(new Product(5,"5", "product5", "brand5", 20, 300, 100,"1"));
+
+        when(productRepository.findAll())
+                .thenReturn(entityProducts);
+
+        WorstSellingReport worstSellingReport = reportService.getWorstSelling();
+
+        assertEquals(java.time.LocalDate.now(), worstSellingReport.getDate());
+        assertEquals(2, worstSellingReport.getProductDTOS().size());
+    }
+
+    @DisplayName("Get worst selling product not valid")
+    @Test
+    public void test_GetWorstSelling_Product_not_valid(){
+
+        List<Product> entityProducts = new ArrayList<>();
+
+        entityProducts.add(new Product(1,"1", "product1", "brand1", 10, 100,150,"1"));
+        entityProducts.add(new Product(2,"2", "product2", "brand2", 15, 200,0,"1"));
+        entityProducts.add(new Product(3,"3", "product3", "brand3", 20, 300, 200,"1"));
+        entityProducts.add(new Product(4,"4", "product4", "brand4", 20, 300, 0,"1"));
+        entityProducts.add(new Product(5,"5", "product5", "brand5", 20, 300, 100,"1"));
+
+        when(productRepository.findAll())
+                .thenReturn(entityProducts);
+
+        WorstSellingReport worstSellingReport = reportService.getWorstSelling();
+
+        assertEquals(java.time.LocalDate.now(), worstSellingReport.getDate());
+        assertNotEquals(3, worstSellingReport.getProductDTOS().size());
     }
 }

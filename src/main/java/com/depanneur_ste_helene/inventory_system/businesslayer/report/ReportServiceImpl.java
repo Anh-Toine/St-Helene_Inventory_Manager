@@ -6,6 +6,7 @@ import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductDTO;
 import com.depanneur_ste_helene.inventory_system.datalayer.product.ProductRepository;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.BestSellingReport;
 import com.depanneur_ste_helene.inventory_system.datalayer.report.ValueReport;
+import com.depanneur_ste_helene.inventory_system.datalayer.report.WorstSellingReport;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class ReportServiceImpl implements ReportService{
     }
 
     public BestSellingReport getBestSelling(){
+
         List<Product> productList = productRepository.findAll();
         productList.sort(Comparator.comparing(Product::getQuantitySold).reversed());
 
@@ -59,8 +61,29 @@ public class ReportServiceImpl implements ReportService{
 
         BestSellingReport bestSellingReport = new BestSellingReport(
                 java.time.LocalDate.now(),
-                bestSellingProduct);
+                bestSellingProduct
+        );
 
         return bestSellingReport;
+    }
+
+    public WorstSellingReport getWorstSelling() {
+
+        List<Product> productList = productRepository.findAll();
+        List<ProductDTO> worstSellingProduct = new ArrayList<>();
+
+        for(int i = 0; i < productList.size(); i++){
+            if(productList.get(i).getQuantity() != 0 &&
+                    productList.get(i).getQuantitySold() == 0){
+                worstSellingProduct.add(productMapper.entityToModel(productList.get(i)));
+            }
+        }
+
+        WorstSellingReport worstSellingReport = new WorstSellingReport(
+                java.time.LocalDate.now(),
+                worstSellingProduct
+        );
+
+        return worstSellingReport;
     }
 }
