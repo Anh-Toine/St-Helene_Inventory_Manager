@@ -126,9 +126,9 @@ public class SupplierServiceImplTests {
         // Arrange
         Supplier entity = new Supplier(1,UUID.randomUUID().toString(),"Foo","FooRep","foo@email" +
                 ".com","111-111-1111");
-        when(supplierRespository.findBySupplierName(entity.getSupplierName())).thenReturn(Optional.of(entity));
+        when(supplierRespository.findBySupplierId(entity.getSupplierId())).thenReturn(Optional.of(entity));
         // Act
-        supplierService.deleteSupplier(entity.getSupplierName());
+        supplierService.deleteSupplier(entity.getSupplierId());
         // Assert
         verify(supplierRespository, times(1)).delete(entity);
     }
